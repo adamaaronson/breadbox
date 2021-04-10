@@ -11,7 +11,7 @@ export default class App extends Component {
         super(props);
         this.state = {
             userName: '',
-            uid: '',
+            userID: '',
             roomCode: '',
             thing: '',
             isAnswerer: true,
@@ -19,9 +19,10 @@ export default class App extends Component {
         }
 
         this.setUserName = this.setUserName.bind(this);
-        this.setThing = this.setThing.bind(this);
+        this.submitThing = this.submitThing.bind(this);
         this.setAnswerer = this.setAnswerer.bind(this);
         this.setRoomCode = this.setRoomCode.bind(this);
+        this.setUserID = this.setUserID.bind(this);
     }
 
     /* Functions for child components to control App state */
@@ -44,9 +45,15 @@ export default class App extends Component {
         })
     }
 
-    setThing(thing) {
+    submitThing(thing) {
         this.setState({
             thing: thing
+        })
+    }
+
+    setUserID(userID) {
+        this.setState({
+            userID: userID
         })
     }
 
@@ -62,6 +69,7 @@ export default class App extends Component {
                         <Welcome
                             onSetRoomCode={this.setRoomCode}
                             onSetAnswerer={this.setAnswerer}
+                            onSetUserID={this.setUserID}
                             onNameChange={this.setUserName}
                         />
                     )}/>
@@ -70,17 +78,20 @@ export default class App extends Component {
                         <GameSetup
                             roomCode={this.state.roomCode}
                             isAnswerer={this.state.isAnswerer}
-                            onSetThing={this.setThing}
+                            onSubmitThing={this.submitThing}
                         />
                     )}/>
                     
                     <Route exact path="/game" render={() => (
                         this.state.isAnswerer ? (
                             <Answerer
+                                userID={this.state.userID}
                                 thing={this.state.thing}
                             />
                         ) : (
-                            <Guesser />
+                            <Guesser
+                                userID={this.state.userID}
+                            />
                         )
                     )}/>
                 </div>

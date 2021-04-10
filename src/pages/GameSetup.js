@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {BrowserRouter as Router, Link, Route, Redirect} from 'react-router-dom'
+import db from '../services/firebase';
 
 export default class GameSetup extends Component {
     constructor(props) {
@@ -14,10 +15,16 @@ export default class GameSetup extends Component {
         this.handleSetThing = this.handleSetThing.bind(this)
     }
 
-    componentDidMount() {
-        // TODO: React to database changes to update currentPlayers in real-time
-        this.setState({
-            currentPlayers: ['Cale', 'Adam', 'Jack', 'Jackson']
+    /* Updates in real-time as players join the game */
+    async componentDidMount() {
+        db.ref("games/" + this.props.roomCode + "/memberIDs").on("value", snapshot => {
+            let players = []
+            snapshot.forEach((person) => {
+                players.push(person.val().name);
+            })
+            this.setState({
+                currentPlayers: players
+            })
         })
     }
 
@@ -27,10 +34,10 @@ export default class GameSetup extends Component {
         })
     }
 
-    handleSetThing(event) {
+    handleSubmitThing(event) {
         // TODO: Launch a new game as the Answerer
         event.preventDefault();
-        this.props.onSetThing(this.state.thing);
+        this.props.onSubmitThing(this.state.thing);
         this.setState({
             beginningGame: true
         })
@@ -52,7 +59,7 @@ export default class GameSetup extends Component {
                     <h2>Current Players: {this.state.currentPlayers.join(", ")}</h2>
                     
                     {this.props.isAnswerer ? (
-                        <form onSubmit={this.handleSetThing}>
+                        <form onSubmit={this.handleSubmitThing}>
                             <label htmlFor="thing-input-box">
                                 Pick a thing:
                             </label>

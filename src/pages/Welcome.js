@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import {BrowserRouter as Router, Link, Route, Redirect} from 'react-router-dom'
+import db from '../services/firebase.js'
+
+const ROOM_CODE_LENGTH = 5;
 
 export default class Welcome extends Component {
     constructor(props) {
@@ -35,16 +38,52 @@ export default class Welcome extends Component {
         })
     }
 
+    generateID(length) {
+        var result = [];
+        var characters = '0123456789';
+        var charactersLength = characters.length;
+        for (var i = 0; i < length; i++) {
+            result.push(characters.charAt(Math.floor(Math.random() * charactersLength)));
+        }
+        return result.join('');
+    }
+
     /* Creating a room */
 
     handleCreateRoomClick() {
-        // TODO: generate room code
         this.setState({
             settingUpGame: true
         })
         this.props.onNameChange(this.state.name);
-        this.props.onSetRoomCode("code");
         this.props.onSetAnswerer(true);
+
+        // Create a new user ID
+        // let userID = db.ref("users").push({
+        //     name: this.state.name
+        // }).key;
+        // this.props.onSetUserID(userID);
+
+        // Create a new room and add the user  
+        let roomCode = this.generateID(ROOM_CODE_LENGTH);
+        this.props.onSetRoomCode(roomCode);
+
+        db.ref("games/" + roomCode).set({
+            started: false,
+            finished: false,
+            answererID: null,
+            memberIDs: [],
+            questions: []
+        })
+
+        let userID = db.ref("games/" + roomCode + "/memberIDs").push({
+            name: this.state.name
+        }).key;
+        
+        let updates = {};
+        updates["/games/" + roomCode + "/answererID"] = userID;
+        db.ref().update(updates);
+
+        this.props.onSetUserID(userID);
     }
 
     /* Joining a room */
@@ -56,21 +95,36 @@ export default class Welcome extends Component {
         this.props.onNameChange(this.state.name);
     }
 
+    // returns promise that is satisfied when room code is evaluated to valid or invalid
     isValidRoomCode(code) {
-        // TODO: use database stuff to determine whether code is valid
-        return true;
+        return db.ref("games/" + code).once("value").then(
+            snapshot => snapshot.exists()
+        )
     }
 
     handleRoomCodeSubmit(event) {
         event.preventDefault()
         let code = this.state.roomCode;
-        if (this.isValidRoomCode(code)) {
-            this.props.onSetRoomCode(code);
-            this.props.onSetAnswerer(false);
-            this.setState({
-                settingUpGame: true
-            })
-        }
+        this.isValidRoomCode(code).then((isValid) => {
+            if (isValid) {
+                this.props.onSetRoomCode(code);
+                
+                // Add the user to the room
+                let userID = db.ref("games/" + code + "/memberIDs").push({
+                    name: this.state.name
+                }).key;
+                this.props.onSetUserID(userID);
+     
+                this.props.onSetAnswerer(false);
+                this.setState({
+                    settingUpGame: true
+                })
+            } else {
+                alert("Invalid room code!")
+            }
+        })
+        // TODO: add new user to database
+        
     }
 
     render() {

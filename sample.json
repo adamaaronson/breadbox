@@ -1,10 +1,17 @@
 {
-	"gameInstances": {
+	"games": {
 		"$instance-1": {
-            "isActive": true,
-			"joinCode": "12345",
+            "finished": false,
+			"roomCode": "12345",
             "answererID": "cale-id",
-			"memberIDs": ["cale-id", "adam-id", "jack-id"],
+			"memberIDs": {
+                "$cale-id": {
+                    "name": "Cale"
+                },
+                "$cale-id": {
+                    "name": "Cale"
+                }
+            },
 			"questions": {
 				"$question-id-1": {
                     "timestamp": "<timestamp>",

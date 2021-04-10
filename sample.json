@@ -1,0 +1,31 @@
+{
+	"gameInstances": {
+		"$instance-1": {
+            "isActive": true,
+			"joinCode": "12345",
+            "answererID": "cale-id",
+			"memberIDs": ["cale-id", "adam-id", "jack-id"],
+			"questions": {
+				"$question-id-1": {
+                    "timestamp": "<timestamp>",
+                    "questionText": "Is it bigger than a breadbox?",
+                    "userID": "cale-id",
+                    "isGuess": false,
+                    "answer": "No"
+                },
+                "$question-id-2$": {
+                    "timestamp": "<timestamp>",
+                    "questionText": "Is it bigger than a breadbox?",
+                    "userID": "adam-id",
+                    "isGuess": false,
+                    "answer": "Yes"
+                }
+			}
+		}
+	},
+    "users": {
+        "$cale-id": {
+            "name": "Cale"
+        }
+    }
+}

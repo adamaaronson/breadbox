@@ -64,7 +64,7 @@ export default class Answerer extends Component {
         updates["/games/" + this.props.roomCode + "/questions/" + this.state.questions[0].questionID + "/answer"] = event.target.value;
         db.ref().update(updates);
         
-        if (this.state.questions[0].isGuess && event.target.value === "Yes") {
+        if (this.state.questions[0].isGuess && event.target.value.startsWith("Yes")) {
 
             // TODO: Track winner in the database
             // this.setState({

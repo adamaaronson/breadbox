@@ -60,7 +60,7 @@ export default class Endgame extends Component {
 
             if (!this.state.firstLoad) { // && snapshot.val() !== this.state.prevAnswererID
                 this.setState({
-                    nextAnswererSelected: true
+                    nextAnswererSelected: true // test
                 });
             }
 

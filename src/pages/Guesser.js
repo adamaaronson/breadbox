@@ -74,39 +74,49 @@ export default class Guesser extends Component {
                     </h3>
                 </div>
 
-                <form className="question-form" onSubmit={this.handleQuestionSubmit}>
-                    <label className="question-box-label" htmlFor="question-input-box">
-                        Ask a question:
-                    </label>
-                    <input
-                        id="question-input-box"
-                        type="text"
-                        value={this.state.question}
-                        onChange={this.handleQuestionChange}
-                        placeholder="Is it bigger than a breadbox?">
-                    </input>
-                    <button type="submit" disabled={this.state.question === ""}>
-                        Ask
-                    </button>
-                </form>
+                <div className="player-body">
+                <div className="player-body-main">
+                    <form className="question-form" onSubmit={this.handleQuestionSubmit}>
+                            <label className="question-box-label" htmlFor="question-input-box">
+                                Ask a question:
+                            </label>
+                            <div className="guesser-input-wrapper">
+                                <input
+                                    class="guesser-input"
+                                    id="question-input-box"
+                                    type="text"
+                                    value={this.state.question}
+                                    onChange={this.handleQuestionChange}
+                                    placeholder="Is it bigger than a breadbox?">
+                                </input>
+                                <button type="submit" disabled={this.state.question === ""}>
+                                    Ask
+                                </button>
+                            </div>
+                        </form>
 
-                <form className="guess-form" onSubmit={this.handleGuessSubmit}>
-                    <label className="question-box-label" htmlFor="guess-input-box">
-                        Venture a guess:
-                    </label>
-                    <input
-                        id="guess-input-box"
-                        type="text"
-                        value={this.state.guess}
-                        onChange={this.handleGuessChange}
-                        placeholder="Bread">
-                    </input>
-                    <button type="submit" disabled={this.state.guess === ""}>
-                        Guess
-                    </button>
-                </form>
-
-                <QuestionLog roomCode={this.props.roomCode}/>
+                        <form className="guess-form" onSubmit={this.handleGuessSubmit}>
+                            <label className="question-box-label" htmlFor="guess-input-box">
+                                Venture a guess:
+                            </label>
+                            <div className="guesser-input-wrapper">
+                                <input
+                                    class="guesser-input"
+                                    id="guess-input-box"
+                                    type="text"
+                                    value={this.state.guess}
+                                    onChange={this.handleGuessChange}
+                                    placeholder="Bread">
+                                </input>
+                                <button type="submit" disabled={this.state.guess === ""}>
+                                    Guess
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <QuestionLog roomCode={this.props.roomCode}/>
+                </div>
+                    
             </div>
         )
     }

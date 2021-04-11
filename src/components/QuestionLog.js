@@ -46,18 +46,21 @@ export default class QuestionLog extends Component {
                     Question Log
                 </h3>
                 <div className="question-log-table">
-                    {this.state.questions.map((question, index) => 
-                        <div key={"q" + index} className="question-log-row">
+                    {this.state.questions.slice(0).reverse().map((question, index) => 
+                        <React.Fragment key={"q" + index}>
+                            <span className="question-number">
+                                {this.state.questions.length - index}
+                            </span>
                             <span className="question-log-name">
-                                {question.userName}
-                            </span> <span className="question-log-asked">
-                                {question.isGuess ? "guessed" : "asked"}
-                            </span> <span className="question-log-question">
+                                {question.userName} {question.isGuess ? "guessed:" : "asked:"}
+                            </span>
+                            <span className="question-log-question">
                                 {question.questionText}
-                            </span> <span className="question-log-answer">
+                            </span>
+                            <span className={"question-log-answer " + (question.answer.startsWith("No") ? "answer-no" : "") + (question.answer.startsWith("Yes") ? "answer-yes" : "")}>
                                 {question.answer}
                             </span>
-                        </div>
+                        </React.Fragment>
                     )}
                 </div>
                 

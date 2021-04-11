@@ -17,14 +17,40 @@
     margin-bottom: $spacing-unit;
 }
 
-.answerer-body {
+.player-body {
     display: flex;
     justify-content: center;
-    max-width: 800px;
+    max-width: 1000px;
     margin: auto;
+    font-size: 1.2rem;
 
     & > * {
         flex: 1;
+    }
+}
+.player-body-main {
+    padding-right: $spacing-unit;
+    border-right: 1px solid gray;
+    margin-right: $spacing-unit;
+}
+
+@media (max-width: 800px) {
+    .player-body {
+        flex-flow: column wrap;
+        align-items: center;
+
+        & > * {
+            flex: 0;
+        }
+    }
+
+    .player-body-main {
+        padding-right: 0;
+        border-right: none;
+        margin-right: 0;
+        padding-bottom: $spacing-unit;
+        border-bottom: 1px solid gray;
+        margin-bottom: $spacing-unit;
     }
 }
 
@@ -66,4 +92,43 @@
 
 .no-button {
     background: $no-color;
+}
+
+.guesser-input-wrapper {
+    display: flex;
+}
+
+.guesser-input {
+    flex: 1;
+}
+
+// Question log
+
+.question-log-title {
+    padding-bottom: $spacing-unit;
+}
+
+.question-log-table {
+    display: grid;
+    grid-template-columns: auto auto 1fr auto;
+    // grid-column-gap: $spacing-unit / 2;
+
+    & > * {
+        text-align: left;
+        border-bottom: 1px solid $gray;
+        padding-bottom: $spacing-unit / 2;
+        padding-top: $spacing-unit / 2;
+        padding-right: $spacing-unit / 2;
+    }
+}
+
+.question-number {
+    color: $orange;
+}
+.answer-yes {
+    color: $yes-color;
+}
+
+.answer-no {
+    color: $no-color;
 }

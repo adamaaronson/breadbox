@@ -96,8 +96,8 @@ export default class Answerer extends Component {
                     {this.props.thing}
                 </h2>
 
-                <div className="answerer-body">
-                <div className="answer-area">
+                <div className="player-body">
+                    <div className="player-body-main">
                         {noQuestions ? (
                             <h3 className="question-box">
                                 Waiting for questions...

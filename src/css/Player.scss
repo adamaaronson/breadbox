@@ -80,6 +80,7 @@
     flex: 1;
     padding: 2 * $spacing-unit;
     margin-bottom: $spacing-unit / 2;
+    font-size: 1.5em;
 }
 
 .small-answer-buttons > * {
@@ -120,15 +121,28 @@
         padding-top: $spacing-unit / 2;
         padding-right: $spacing-unit / 2;
     }
+
+    max-height: 500px;
+    overflow: scroll;
+
+}
+
+.no-questions {
+    font-size: 1.4em;
+    color: $gray;
 }
 
 .question-number {
     color: $orange;
 }
 .answer-yes {
-    color: $yes-color;
+    color: $yes-color !important;
 }
 
 .answer-no {
-    color: $no-color;
+    color: $no-color !important;
+}
+
+.question-log-answer {
+    color: $orange;
 }

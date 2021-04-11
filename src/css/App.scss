@@ -29,6 +29,10 @@ body {
     background: $white;
 }
 
+.game-page {
+    padding: $spacing-unit * 2;
+}
+
 :disabled {
     opacity: 0.5;
 }
@@ -79,7 +83,11 @@ input[type=text] {
 }
 
 .title {
-    font-size: $spacing-unit * 3;
+    font-size: 5rem;
     line-height: 1em;
+}
+
+.subtitle {
+    font-size: 1.5rem;
 }
 

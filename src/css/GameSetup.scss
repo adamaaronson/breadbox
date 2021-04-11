@@ -1,0 +1,17 @@
+@import "App.scss";
+
+.game-setup-header {
+    margin-bottom: $spacing-unit;
+}
+
+.room-code-box {
+    background: $yellow;
+    padding: $spacing-unit;
+    display: inline-block;
+    margin-bottom: $spacing-unit;
+    border: $good-border;
+}
+
+.current-players-list {
+    margin-bottom: $spacing-unit;
+}

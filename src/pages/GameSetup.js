@@ -32,15 +32,24 @@ export default class GameSetup extends Component {
                 currentPlayers: players
             })
         })
+
+        db.ref("games/" + this.props.roomCode + "/started").on("value", snapshot => {
+            const data = snapshot.val();
+            if (data) {
+                this.setState({
+                    beginningGame: true
+                })
+            }
+        })
     }
 
     /* Called after the Answerer submits a "thing". Starts the game round. */
     handleSubmitThing(event) {
         event.preventDefault();
         this.props.onSubmitThing(this.state.thing);
-        this.setState({
-            beginningGame: true
-        })
+        let updates = {};
+        updates["games/" + this.props.roomCode + "/started"] = true;
+        db.ref().update(updates);
     }
 
     render() {
@@ -77,10 +86,6 @@ export default class GameSetup extends Component {
                             <h3>
                                 Waiting for answerer to pick a thing...
                             </h3>
-                            <Link to="/game">
-                                {/* TODO: Is this necessary */}
-                                Start guessing
-                            </Link>
                         </div>
                         
                     )} 

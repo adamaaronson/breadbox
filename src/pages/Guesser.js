@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import QuestionLog from '../components/QuestionLog.js'
+import Header from '../components/Header.js'
 import {BrowserRouter as Router, Link, Route, Redirect} from 'react-router-dom'
 import db from '../services/firebase.js';
 
@@ -72,13 +73,8 @@ export default class Guesser extends Component {
         return this.state.finished ? (
             <Redirect to="/end" />
         ) : (
-            <div>
-                <h2>
-                    Your name is {this.props.userName}.
-                </h2>
-                <p>
-                    Answerer is thinking of something...
-                </p>
+            <div className="game-page guesser-page">
+                <Header />
 
                 <form className="question-form" onSubmit={this.handleQuestionSubmit}>
                     <label htmlFor="question-input-box">

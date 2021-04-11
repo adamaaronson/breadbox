@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import QuestionLog from '../components/QuestionLog.js'
+import Header from '../components/Header.js'
 import {BrowserRouter as Router, Link, Route, Redirect} from 'react-router-dom'
 import db from '../services/firebase.js'
 
@@ -90,7 +91,8 @@ export default class Answerer extends Component {
         return this.state.finished ? (
             <Redirect to="/end" />
         ) : (
-            <div>
+            <div className="game-page answerer-page">
+                <Header />
                 <h2>
                     Your name is {this.props.userName}.
                 </h2>

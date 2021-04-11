@@ -1,4 +1,6 @@
+import '../css/Welcome.scss'
 import React, { Component } from 'react'
+import Header from '../components/Header.js'
 import {BrowserRouter as Router, Link, Route, Redirect} from 'react-router-dom'
 import db from '../services/firebase.js'
 
@@ -134,56 +136,62 @@ export default class Welcome extends Component {
             this.state.settingUpGame ? (
                 <Redirect to="/setup" />
             ) : (
-                <div className="welcome-page">
-                    {/* Enter the user name */}
-                    <form className="name-form" onSubmit={this.handleNameSubmit}>
-                        <label htmlFor="enter-name">
-                            What's your name?
-                        </label>
-                        <input
-                            className="enter-name"
-                            id="enter-name"
-                            type="text"
-                            onChange={this.handleNameChange}>
-                        </input>
-                    </form>
-
-                    {/* Create a new room, only if a name is entered */}
-                    <button
-                        className="create-room"
-                        disabled={this.state.name === ''}
-                        onClick={this.handleCreateRoomClick}>
-                        Create new room
-                    </button>
-
-                    {/* Join an existing room, only if a name is entered. 
-                        Prompts entry of a join code */}
-                    <button
-                        className="join-room"
-                        disabled={this.state.name === ''}
-                        onClick={this.handleJoinRoomClick}>
-                        Join room
-                    </button>
-
-                    {/* Joins an existing room upon join code entry. */}
-                    {this.state.joiningRoom &&
-                        <form className="room-code-form" onSubmit={this.handleRoomCodeSubmit}>
-                            <label htmlFor="enter-room-code">
-                                Enter room code:
+                <div className="welcome-page-wrapper">
+                    <div className="welcome-page">
+                        <Header />
+                        {/* Enter the user name */}
+                        <form className="name-form" onSubmit={this.handleNameSubmit}>
+                            <label for="enter-name" className="enter-name-label">
+                                What's your name?
                             </label>
                             <input
-                                className="enter-room-code"
-                                id="enter-room-code"
+                                className="enter-name"
+                                id="enter-name"
                                 type="text"
-                                onChange={this.handleRoomCodeChange}>
+                                onChange={this.handleNameChange}>
                             </input>
-                            <button
-                                type="submit"
-                                className="room-code-button" disabled={this.state.roomCode === ""}>
-                                Submit
-                            </button>
                         </form>
-                    }
+
+                        {/* Create a new room, only if a name is entered */}
+                        <button
+                            className="create-room"
+                            disabled={this.state.name === ''}
+                            onClick={this.handleCreateRoomClick}>
+                            Create new room
+                        </button>
+
+                        {/* Join an existing room, only if a name is entered. 
+                            Prompts entry of a join code */}
+                        <button
+                            className="join-room"
+                            disabled={this.state.name === ''}
+                            onClick={this.handleJoinRoomClick}>
+                            Join room
+                        </button>
+
+                        {/* Joins an existing room upon join code entry. */}
+                        
+                        {this.state.joiningRoom &&
+                        <>
+                            <div className="enter-room-code-label">
+                                Enter room code:
+                            </div>
+                            <form className="room-code-form" onSubmit={this.handleRoomCodeSubmit}>
+                                <input
+                                    className="enter-room-code"
+                                    id="enter-room-code"
+                                    type="text"
+                                    onChange={this.handleRoomCodeChange}>
+                                </input>
+                                <button
+                                    type="submit"
+                                    className="room-code-button" disabled={this.state.roomCode === ""}>
+                                    Submit
+                                </button>
+                            </form>
+                        </>
+                        }
+                    </div>
                 </div>
             )
         )

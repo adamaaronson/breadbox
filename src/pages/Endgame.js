@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import db from '../services/firebase.js'
+import Header from '../components/Header.js'
 
 export default class Endgame extends Component {
     constructor(props) {
@@ -62,8 +63,9 @@ export default class Endgame extends Component {
 
     render() {
         return (
-            <div>
-                <h2>{this.state.winnerName} won the game!</h2>
+            <div className="game-page endgame-page">
+                <Header />
+                <h2>{this.state.winner} won the game!</h2>
                 <h2>The thing was {this.state.thing}</h2>
                 <h2>Current Players: </h2>
                 {this.state.currentPlayers.map(player => (

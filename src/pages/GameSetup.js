@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Header from '../components/Header.js'
 import {BrowserRouter as Router, Link, Route, Redirect} from 'react-router-dom'
 import db from '../services/firebase';
 
@@ -58,7 +59,8 @@ export default class GameSetup extends Component {
             this.state.beginningGame ? (
                 <Redirect to="/game" />
             ) : (
-                <div>
+                <div className="game-page game-setup-page">
+                    <Header />
                     {this.props.isAnswerer ? (
                         <h1>You're creating a new game!</h1>
                     ) : (

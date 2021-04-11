@@ -1,4 +1,4 @@
-import './css/App.css'
+import './css/App.scss'
 import React, { Component } from 'react'
 import {BrowserRouter as Router, Route } from 'react-router-dom'
 import Welcome from './pages/Welcome.js'
@@ -66,10 +66,6 @@ export default class App extends Component {
         return (
             <Router>
                 <div className="app">
-                    <h1 className="title">
-                        Breadbox
-                    </h1>
-
                     <Route exact path="/" render={() => (
                         <Welcome
                             onSetRoomCode={this.setRoomCode}

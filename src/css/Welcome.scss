@@ -1,0 +1,44 @@
+@import "App.scss";
+
+// Welcome page
+
+.welcome-page {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5em;
+    display: inline-block;
+    width: calc(min(800px, 100%));
+
+    .title {
+        font-size: 5rem;
+    }
+}
+
+.name-form {
+    margin-bottom: $spacing-unit;
+}
+
+.enter-name-label {
+    padding-right: $spacing-unit;
+}
+
+.create-room {
+    margin-right: $spacing-unit;
+}
+
+.join-room {
+    background: $orange;
+}
+
+.enter-room-code-label {
+    margin-top: $spacing-unit;
+    margin-bottom: $spacing-unit / 2;
+}
+
+.enter-room-code {
+    display: inline-block;
+    margin-right: $spacing-unit;
+    width: calc(min(6em, 100%));
+}

@@ -78,7 +78,7 @@ export default class GameSetup extends Component {
     render() {
         return (
             this.state.beginningGame ? (
-                <Redirect to="/game" />
+                <Redirect to="./game" />
             ) : (
                 <div className="game-page game-setup-page">
                     <Header />

@@ -7,6 +7,9 @@ import Guesser from './pages/Guesser.js'
 import Answerer from './pages/Answerer.js'
 import Endgame from './pages/Endgame.js'
 
+const IS_DEPLOY = true;
+const PATH_PREFIX = "/breadbox";
+
 export default class App extends Component {
     constructor(props) {
         super(props);
@@ -62,11 +65,19 @@ export default class App extends Component {
         })
     }
 
+    getRealPath(basicPath) {
+        if (IS_DEPLOY) {
+            return PATH_PREFIX + basicPath
+        } else {
+            return basicPath
+        }
+    }
+
     render() {
         return (
             <Router>
                 <div className="app">
-                    <Route exact path="/" render={() => (
+                    <Route exact path={this.getRealPath("/")} render={() => (
                         <Welcome
                             onSetRoomCode={this.setRoomCode}
                             onSetAnswerer={this.setAnswerer}
@@ -75,14 +86,14 @@ export default class App extends Component {
                         />
                     )}/>
 
-                    <Route exact path="/setup" render={() => (
+                    <Route exact path={this.getRealPath("/setup")} render={() => (
                         <GameSetup
                             roomCode={this.state.roomCode}
                             isAnswerer={this.state.isAnswerer}
                         />
                     )}/>
                     
-                    <Route exact path="/game" render={() => (
+                    <Route exact path={this.getRealPath("/game")} render={() => (
                         this.state.isAnswerer ? (
                             <Answerer
                                 userID={this.state.userID}
@@ -97,7 +108,7 @@ export default class App extends Component {
                             />
                         )
                     )}/>
-                    <Route exact path="/end" render={() => (
+                    <Route exact path={this.getRealPath("/end")} render={() => (
                         <Endgame
                             roomCode={this.state.roomCode}
                             isAnswerer={this.state.isAnswerer}

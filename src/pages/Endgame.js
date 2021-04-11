@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import db from '../services/firebase.js'
 import Header from '../components/Header.js'
 import { BrowserRouter as Router, Link, Route, Redirect } from 'react-router-dom'
+import '../css/Endgame.scss'
 
 export default class Endgame extends Component {
     constructor(props) {
@@ -89,23 +90,38 @@ export default class Endgame extends Component {
 
     render() {
         return this.state.nextAnswererSelected ? (
-            <Redirect to="/setup" />
+            <Redirect to="./setup" />
         ) : (
             <div className="game-page endgame-page">
                 <Header />
-                <h2>{this.state.winnerName} won the game!</h2>
-                <h2>The thing was {this.state.thing}</h2>
-                <h2>Current Players: </h2>
+                <h2 className="winner-announcement">
+                    {this.state.winnerName} won the game!
+                </h2>
+                <h3 className="thing-announcement">
+                    The answer was {this.state.thing}.
+                </h3>
+
+                {/* <h2>Current Players: </h2>
                 {this.state.currentPlayers.map(player => (
                     <p key={player.userID}>{player.userName}</p>
-                ))}
+                ))} */}
 
                 {this.props.isAnswerer ? (
                     <div>
-                        <h3>Pick the next answerer:</h3>
-                        {this.state.currentPlayers.map(player => (
-                            <button value={player.userID} key={player.userID} onClick={this.setNextAnswerer}>{player.userName}</button>
-                        ))}
+                        <h3 className="player-name-button-header">
+                            Who's thinking of something next?
+                        </h3>
+                        <div>
+                            {this.state.currentPlayers.map(player => (
+                                <button
+                                    className="player-name-button"
+                                    value={player.userID}
+                                    key={player.userID}
+                                    onClick={this.setNextAnswerer}>
+                                    {player.userName}
+                                </button>
+                            ))}
+                        </div>
                     </div>
                 ) : (
                     <div>

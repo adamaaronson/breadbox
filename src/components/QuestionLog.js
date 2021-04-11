@@ -43,26 +43,33 @@ export default class QuestionLog extends Component {
         return (
             <div>
                 <h3 className="question-log-title">
-                    Question Log
+                    Answer log
                 </h3>
-                <div className="question-log-table">
-                    {this.state.questions.slice(0).reverse().map((question, index) => 
-                        <React.Fragment key={"q" + index}>
-                            <span className="question-number">
-                                {this.state.questions.length - index}
-                            </span>
-                            <span className="question-log-name">
-                                {question.userName} {question.isGuess ? "guessed:" : "asked:"}
-                            </span>
-                            <span className="question-log-question">
-                                {question.questionText}
-                            </span>
-                            <span className={"question-log-answer " + (question.answer.startsWith("No") ? "answer-no" : "") + (question.answer.startsWith("Yes") ? "answer-yes" : "")}>
-                                {question.answer}
-                            </span>
-                        </React.Fragment>
-                    )}
-                </div>
+                {this.state.questions.length == 0 ? (
+                    <div className="no-questions">
+                        No questions answered!
+                    </div>
+                ) : (
+                    <div className="question-log-table">
+                        {this.state.questions.slice(0).reverse().map((question, index) => 
+                            <React.Fragment key={"q" + index}>
+                                <span className="question-number">
+                                    {this.state.questions.length - index}
+                                </span>
+                                <span className="question-log-name">
+                                    {question.userName} {question.isGuess ? "guessed:" : "asked:"}
+                                </span>
+                                <span className="question-log-question">
+                                    {question.questionText}
+                                </span>
+                                <span className={"question-log-answer " + (question.answer.startsWith("No") ? "answer-no" : "") + (question.answer.startsWith("Yes") ? "answer-yes" : "")}>
+                                    {question.answer}
+                                </span>
+                            </React.Fragment>
+                        )}
+                    </div>
+                )}
+                
                 
                 
             </div>

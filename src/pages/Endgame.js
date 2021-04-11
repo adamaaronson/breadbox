@@ -58,7 +58,7 @@ export default class Endgame extends Component {
         db.ref("games/" + this.props.roomCode + "/answererID").on('value', (snapshot) => {
             this.props.onSetAnswerer(snapshot.val() === this.props.userID);
 
-            if (!this.state.firstLoad && snapshot.val() !== this.state.prevAnswererID) {
+            if (!this.state.firstLoad) { // && snapshot.val() !== this.state.prevAnswererID
                 this.setState({
                     nextAnswererSelected: true
                 });

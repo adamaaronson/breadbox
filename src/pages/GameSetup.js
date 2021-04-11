@@ -26,6 +26,8 @@ export default class GameSetup extends Component {
     async componentDidMount() {
         console.log("Game setup loaded");
 
+        db.ref("games/" + this.props.roomCode + "/questions").remove();
+
         db.ref("games/" + this.props.roomCode + "/memberIDs").on("value", snapshot => {
             let players = []
             snapshot.forEach((person) => {
@@ -36,7 +38,6 @@ export default class GameSetup extends Component {
             })
         })
 
-        // TODO: This is being called and set to true, redirecting
         db.ref("games/" + this.props.roomCode + "/started").on("value", snapshot => {
             const data = snapshot.val();
             if (data) {

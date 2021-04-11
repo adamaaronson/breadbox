@@ -62,11 +62,14 @@ export default class GameSetup extends Component {
                 <div className="game-page game-setup-page">
                     <Header />
                     
-                    <br/>
+                    <h2 className="game-setup-header">
+                        You're {this.props.isAnswerer ? "answering" : "guessing"} this round!
+                    </h2>
+
                     <div className="room-code-box">
-                        <h2 className="send-the-code">
+                        <h3 className="send-the-code">
                             Send your friends this code:
-                        </h2>
+                        </h3>
                         <h1 className="room-code">
                             {this.props.roomCode}
                         </h1>
@@ -81,24 +84,26 @@ export default class GameSetup extends Component {
                         </h2>
                     </div>
 
-                    <h2 className="game-setup-header">
-                        You're {this.props.isAnswerer ? "answering" : "guessing"} this round!
-                    </h2>
+                    
 
                     
                     
                     {this.props.isAnswerer ? (
-                        <form onSubmit={this.handleSubmitThing}>
-                            <label htmlFor="thing-input-box">
-                                Pick a thing:
-                            </label>
+                        <form className="thing-input-form" onSubmit={this.handleSubmitThing}>
+                            <h2 className="thing-input-label" htmlFor="thing-input-box">
+                                What are you thinking of?
+                            </h2>
+                            <h4>
+                                (don't tell anyone!)
+                            </h4>
                             <input
+                                className="thing-input-box"
                                 id="thing-input-box"
                                 type="text"
                                 onChange={this.handleThingChange}>
                             </input>
                             <button type="submit" disabled={this.state.thing === ""}>
-                                Begin
+                                Start game!
                             </button>
                         </form>
                     ) : (

@@ -7,7 +7,6 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 1.5em;
     display: inline-block;
     width: calc(min(800px, 100%));
 
@@ -16,12 +15,23 @@
     }
 }
 
+.game-description {
+    max-width: 300px;
+    display: inline-block;
+    margin-bottom: $spacing-unit;
+}
+
 .name-form {
     margin-bottom: $spacing-unit;
 }
 
 .enter-name-label {
     padding-right: $spacing-unit;
+}
+
+.enter-name {
+    max-width: 400px;
+    display: inline-block;
 }
 
 .create-room {

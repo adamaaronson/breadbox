@@ -1,0 +1,29 @@
+@import "App.scss";
+
+.player-info-boxes {
+    max-width: 600px;
+    font-size: 1.2rem;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: $spacing-unit;
+}
+
+.game-page input {
+    margin-right: $spacing-unit / 2;
+}
+
+.thing-youre-thinking-of {
+    margin-bottom: $spacing-unit;
+}
+
+.answerer-body {
+    display: flex;
+    justify-content: center;
+}
+
+.question-box-label {
+    display: block;
+    margin-top: $spacing-unit;
+    margin-bottom: $spacing-unit / 2;
+}

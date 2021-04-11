@@ -27,6 +27,7 @@ h1, h2, h3, h4, h5, h6 {
 
 body {
     background: $white;
+    font-size: 1.4rem;
 }
 
 .game-page {
@@ -82,12 +83,28 @@ input[type=text] {
     margin-bottom: $spacing-unit;
 }
 
+.title-box {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    height: 8rem;
+    margin-right: $spacing-unit/2;
+}
+
 .title {
     font-size: 5rem;
     line-height: 1em;
+    text-align: left;
+    // margin-top: 8px;
 }
 
 .subtitle {
     font-size: 1.5rem;
+    // text-align: left;
+    // margin-left: 5px;
 }
 

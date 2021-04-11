@@ -3,6 +3,7 @@ import QuestionLog from '../components/QuestionLog.js'
 import Header from '../components/Header.js'
 import {BrowserRouter as Router, Link, Route, Redirect} from 'react-router-dom'
 import db from '../services/firebase.js';
+import '../css/Player.scss'
 
 export default class Guesser extends Component {
     constructor(props) {
@@ -64,13 +65,22 @@ export default class Guesser extends Component {
         ) : (
             <div className="game-page guesser-page">
                 <Header />
+                <div className="player-info-boxes">
+                    <h3 className="player-name-box">
+                        Name: {this.props.userName}
+                    </h3>
+                    <h3 className="player-roomcode-box">
+                        Room code: {this.props.roomCode}
+                    </h3>
+                </div>
 
                 <form className="question-form" onSubmit={this.handleQuestionSubmit}>
-                    <label htmlFor="question-input-box">
+                    <label className="question-box-label" htmlFor="question-input-box">
                         Ask a question:
                     </label>
                     <input
                         id="question-input-box"
+                        type="text"
                         value={this.state.question}
                         onChange={this.handleQuestionChange}
                         placeholder="Is it bigger than a breadbox?">
@@ -81,14 +91,15 @@ export default class Guesser extends Component {
                 </form>
 
                 <form className="guess-form" onSubmit={this.handleGuessSubmit}>
-                    <label htmlFor="guess-input-box">
+                    <label className="question-box-label" htmlFor="guess-input-box">
                         Venture a guess:
                     </label>
                     <input
                         id="guess-input-box"
+                        type="text"
                         value={this.state.guess}
                         onChange={this.handleGuessChange}
-                        placeholder="bread">
+                        placeholder="Bread">
                     </input>
                     <button type="submit" disabled={this.state.guess === ""}>
                         Guess

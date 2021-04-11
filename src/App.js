@@ -14,17 +14,14 @@ export default class App extends Component {
             userID: '',
             userName: '',
             roomCode: '',
-            thing: '',
             isAnswerer: true,
         }
 
-        this.submitThing = this.submitThing.bind(this);
         this.setAnswerer = this.setAnswerer.bind(this);
         this.setNextAnswerer = this.setNextAnswerer.bind(this);
         this.setRoomCode = this.setRoomCode.bind(this);
         this.setUserID = this.setUserID.bind(this);
         this.setUserName = this.setUserName.bind(this);
-        //this.setWinner = this.setWinner.bind(this);
     }
 
     /* Functions for child components to control App state */
@@ -53,12 +50,6 @@ export default class App extends Component {
         })
     }
 
-    submitThing(thing) {
-        this.setState({
-            thing: thing
-        })
-    }
-
     setUserID(userID) {
         this.setState({
             userID: userID
@@ -70,12 +61,6 @@ export default class App extends Component {
             userName: userName
         })
     }
-
-    // setWinner(userName) {
-    //     this.setState({
-    //         winner: userName
-    //     })
-    // }
 
     render() {
         return (
@@ -98,7 +83,6 @@ export default class App extends Component {
                         <GameSetup
                             roomCode={this.state.roomCode}
                             isAnswerer={this.state.isAnswerer}
-                            onSubmitThing={this.submitThing}
                         />
                     )}/>
                     
@@ -108,7 +92,6 @@ export default class App extends Component {
                                 userID={this.state.userID}
                                 userName={this.state.userName}
                                 roomCode={this.state.roomCode}
-                                // onSetWinner={this.setWinner}
                                 thing={this.state.thing}
                             />
                         ) : (

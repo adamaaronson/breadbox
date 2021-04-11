@@ -6,7 +6,8 @@ export default class Endgame extends Component {
         super(props);
         this.state = {
             currentPlayers: [],
-            winnerName: ''
+            winnerName: '',
+            thing: ''
         };
     }
 
@@ -31,6 +32,12 @@ export default class Endgame extends Component {
                 winnerName: snapshot.val()
             })
         })
+
+        db.ref("games/" + this.props.roomCode + "/thing").on('value', (snapshot) => {
+            this.setState({
+                thing: snapshot.val()
+            })
+        })
     }
     
     setNextAnswerer(player) {
@@ -41,7 +48,7 @@ export default class Endgame extends Component {
         return (
             <div>
                 <h2>{this.state.winnerName} won the game!</h2>
-                <h2>The thing was {this.props.thing}</h2>
+                <h2>The thing was {this.state.thing}</h2>
 
                 {this.props.isAnswerer ? (
                     <div>

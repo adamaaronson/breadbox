@@ -46,9 +46,10 @@ export default class GameSetup extends Component {
     /* Called after the Answerer submits a "thing". Starts the game round. */
     handleSubmitThing(event) {
         event.preventDefault();
-        this.props.onSubmitThing(this.state.thing);
+        //this.props.onSubmitThing(this.state.thing);
         let updates = {};
         updates["games/" + this.props.roomCode + "/started"] = true;
+        updates["games/" + this.props.roomCode + "/thing"] = this.state.thing;
         db.ref().update(updates);
     }
 

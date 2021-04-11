@@ -9,6 +9,8 @@ export default class Endgame extends Component {
         };
     }
 
+    // TODO: Not any of this!
+
     async componentDidMount() {
         // Load in all the current players with once
         db.ref("games/" + this.props.roomCode + "/memberIDs").on('value', (snapshot) => {

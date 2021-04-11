@@ -106,8 +106,7 @@ export default class App extends Component {
                             roomCode={this.state.roomCode}
                             isAnswerer={this.state.isAnswerer}
                             thing={this.state.thing}
-                            // winner={this.state.winner}
-                            onSetNextAnswerer={this.setNextAnswerer}
+                            userID={this.state.userID}
                         />
                     )}/>
                 </div>

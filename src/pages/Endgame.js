@@ -7,7 +7,8 @@ export default class Endgame extends Component {
         this.state = {
             currentPlayers: [],
             winnerName: '',
-            thing: ''
+            thing: '',
+            nextAnswererSelected: false
         };
     }
 
@@ -39,10 +40,24 @@ export default class Endgame extends Component {
                 thing: snapshot.val()
             })
         })
+
+        // Listen for when the next answerer is selected
+        db.ref("games/" + this.props.roomCode + "/answererID").on('value', (snapshot) => {
+            const newAnswererID = snapshot.val();
+            if (newAnswererID != this.props.userID) {
+                this.setState({
+                    nextAnswererSelected: true
+                })
+            }
+        })
     }
 
-    setNextAnswerer(player) {
-        this.props.onSetNextAnswerer(player)
+    setNextAnswerer(event) {
+        event.preventDefault();
+
+        let updates = {};
+        updates["/games/" + this.props.roomCode + "/answererID/"] = event.target.value;
+        db.ref().update(updates);
     }
 
     render() {
@@ -58,6 +73,9 @@ export default class Endgame extends Component {
                 {this.props.isAnswerer ? (
                     <div>
                         <h3>Pick the next answerer:</h3>
+                        {this.state.currentPlayers.map(player => (
+                            <button value={player.userID} key={player.userID} onClick={this.setNextAnswerer}>{player.userName}</button>
+                        ))}
                     </div>
                 ) : (
                     <div>

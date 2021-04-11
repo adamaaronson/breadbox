@@ -141,7 +141,7 @@ export default class Welcome extends Component {
                         <Header />
                         {/* Enter the user name */}
                         <form className="name-form" onSubmit={this.handleNameSubmit}>
-                            <label for="enter-name" className="enter-name-label">
+                            <label htmlFor="enter-name" className="enter-name-label">
                                 What's your name?
                             </label>
                             <input

@@ -18,7 +18,7 @@ export default class App extends Component {
         }
 
         this.setAnswerer = this.setAnswerer.bind(this);
-        this.setNextAnswerer = this.setNextAnswerer.bind(this);
+        //this.setNextAnswerer = this.setNextAnswerer.bind(this);
         this.setRoomCode = this.setRoomCode.bind(this);
         this.setUserID = this.setUserID.bind(this);
         this.setUserName = this.setUserName.bind(this);
@@ -32,17 +32,17 @@ export default class App extends Component {
         })
     }
 
-    setNextAnswerer(nextAnswerer) {
-        if (nextAnswerer.userID === this.state.userID) {
-            this.setState({
-                isAnswerer: true
-            })
-        } else {
-            this.setState({
-                isAnswerer: false
-            })
-        }
-    }
+    // setNextAnswerer(nextAnswerer) {
+    //     if (nextAnswerer.userID === this.state.userID) {
+    //         this.setState({
+    //             isAnswerer: true
+    //         })
+    //     } else {
+    //         this.setState({
+    //             isAnswerer: false
+    //         })
+    //     }
+    // }
 
     setRoomCode(roomCode) {
         this.setState({
@@ -103,6 +103,8 @@ export default class App extends Component {
                             isAnswerer={this.state.isAnswerer}
                             thing={this.state.thing}
                             userID={this.state.userID}
+                            isPreviousAnswerer={this.state.isAnswerer}
+                            onSetAnswerer={this.setAnswerer}
                         />
                     )}/>
                 </div>

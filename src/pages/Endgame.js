@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import db from '../services/firebase.js'
 import Header from '../components/Header.js'
+import { BrowserRouter as Router, Link, Route, Redirect } from 'react-router-dom'
 
 export default class Endgame extends Component {
     constructor(props) {
@@ -9,13 +10,17 @@ export default class Endgame extends Component {
             currentPlayers: [],
             winnerName: '',
             thing: '',
-            nextAnswererSelected: false
+            nextAnswererSelected: false,
+            prevAnswererID: '',
+            firstLoad: true
         };
+
+        this.setNextAnswerer = this.setNextAnswerer.bind(this)
     }
 
     async componentDidMount() {
         // Load in all the current players
-        db.ref("games/" + this.props.roomCode + "/memberIDs").on("value", snapshot => {
+        db.ref("games/" + this.props.roomCode + "/memberIDs").once("value", snapshot => {
             let players = []
             snapshot.forEach((person) => {
                 players.push({
@@ -29,27 +34,39 @@ export default class Endgame extends Component {
         })
 
         // Load in the game winner
-        db.ref("games/" + this.props.roomCode + "/winnerName").on('value', (snapshot) => {
+        db.ref("games/" + this.props.roomCode + "/winnerName").once('value', (snapshot) => {
             this.setState({
                 winnerName: snapshot.val()
             })
         })
 
         // Load in the game "thing"
-        db.ref("games/" + this.props.roomCode + "/thing").on('value', (snapshot) => {
+        db.ref("games/" + this.props.roomCode + "/thing").once('value', (snapshot) => {
             this.setState({
                 thing: snapshot.val()
             })
         })
 
+        // Load in the game "prevAnswererID"
+        db.ref("games/" + this.props.roomCode + "/answererID").once('value', (snapshot) => {
+            this.setState({
+                prevAnswererID: snapshot.val()
+            })
+        })
+
         // Listen for when the next answerer is selected
         db.ref("games/" + this.props.roomCode + "/answererID").on('value', (snapshot) => {
-            const newAnswererID = snapshot.val();
-            if (newAnswererID != this.props.userID) {
+            this.props.onSetAnswerer(snapshot.val() === this.props.userID);
+
+            if (!this.state.firstLoad && snapshot.val() !== this.state.prevAnswererID) {
                 this.setState({
                     nextAnswererSelected: true
-                })
+                });
             }
+
+            this.setState({
+                firstLoad: false
+            })
         })
     }
 
@@ -58,14 +75,18 @@ export default class Endgame extends Component {
 
         let updates = {};
         updates["/games/" + this.props.roomCode + "/answererID/"] = event.target.value;
+        updates["/games/" + this.props.roomCode + "/started"] = false;
+        updates["/games/" + this.props.roomCode + "/finished"] = false;
         db.ref().update(updates);
     }
 
     render() {
-        return (
+        return this.state.nextAnswererSelected ? (
+            <Redirect to="/setup" />
+        ) : (
             <div className="game-page endgame-page">
                 <Header />
-                <h2>{this.state.winner} won the game!</h2>
+                <h2>{this.state.winnerName} won the game!</h2>
                 <h2>The thing was {this.state.thing}</h2>
                 <h2>Current Players: </h2>
                 {this.state.currentPlayers.map(player => (

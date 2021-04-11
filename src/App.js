@@ -10,15 +10,12 @@ export default class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userName: '',
             userID: '',
             roomCode: '',
-            thing: '',
+            thing: '', // TODO: Should we put this in the DB instead?
             isAnswerer: true,
-            currentPlayers: []
         }
 
-        this.setUserName = this.setUserName.bind(this);
         this.submitThing = this.submitThing.bind(this);
         this.setAnswerer = this.setAnswerer.bind(this);
         this.setRoomCode = this.setRoomCode.bind(this);
@@ -26,12 +23,6 @@ export default class App extends Component {
     }
 
     /* Functions for child components to control App state */
-
-    setUserName(name) {
-        this.setState({
-            userName: name
-        })
-    }
 
     setAnswerer(isAnswerer) {
         this.setState({
@@ -70,7 +61,6 @@ export default class App extends Component {
                             onSetRoomCode={this.setRoomCode}
                             onSetAnswerer={this.setAnswerer}
                             onSetUserID={this.setUserID}
-                            onNameChange={this.setUserName}
                         />
                     )}/>
 

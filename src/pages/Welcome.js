@@ -8,27 +8,24 @@ export default class Welcome extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '', // The value of the username input text box
-            roomCode: '', // The value of the room code input text box
+            name: '',
+            roomCode: '',
             joiningRoom: false,
             settingUpGame: false
         }
 
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleRoomCodeChange = this.handleRoomCodeChange.bind(this);
-        this.handleJoinRoomClick = this.handleJoinRoomClick.bind(this);
         this.handleCreateRoomClick = this.handleCreateRoomClick.bind(this);
+        this.handleJoinRoomClick = this.handleJoinRoomClick.bind(this);
         this.handleRoomCodeSubmit = this.handleRoomCodeSubmit.bind(this);
     }
-
-    /* Text box edit handling */
 
     handleNameChange(event) {
         event.preventDefault();
         this.setState({
             name: event.target.value
         })
-        this.props.onNameChange(this.state.name);
     }
 
     handleRoomCodeChange(event) {
@@ -38,6 +35,9 @@ export default class Welcome extends Component {
         })
     }
 
+    /**
+     * Generates a random room code
+     */
     generateID(length) {
         var result = [];
         var characters = '0123456789';
@@ -48,25 +48,12 @@ export default class Welcome extends Component {
         return result.join('');
     }
 
-    /* Creating a room */
-
+    /**
+     * Creates a new game room and adds the user.
+     */
     handleCreateRoomClick() {
-        this.setState({
-            settingUpGame: true
-        })
-        this.props.onNameChange(this.state.name);
-        this.props.onSetAnswerer(true);
-
-        // Create a new user ID
-        // let userID = db.ref("users").push({
-        //     name: this.state.name
-        // }).key;
-        // this.props.onSetUserID(userID);
-
-        // Create a new room and add the user  
+        // Create a new room
         let roomCode = this.generateID(ROOM_CODE_LENGTH);
-        this.props.onSetRoomCode(roomCode);
-
         db.ref("games/" + roomCode).set({
             started: false,
             finished: false,
@@ -75,46 +62,56 @@ export default class Welcome extends Component {
             questions: []
         })
 
+        // Create a new ID for the current user
         let userID = db.ref("games/" + roomCode + "/memberIDs").push({
             name: this.state.name
         }).key;
         
+        // Add that user ID to the game
         let updates = {};
         updates["/games/" + roomCode + "/answererID"] = userID;
         db.ref().update(updates);
 
         this.props.onSetUserID(userID);
+        this.props.onSetRoomCode(roomCode);
+
+        this.props.onSetAnswerer(true);
+        this.setState({
+            settingUpGame: true
+        })
     }
 
-    /* Joining a room */
-
+    /**
+     * When the user hits "join room", displays the room ID text box.
+     */
     handleJoinRoomClick() {
         this.setState({
             joiningRoom: true
         })
-        this.props.onNameChange(this.state.name);
     }
 
-    // returns promise that is satisfied when room code is evaluated to valid or invalid
+    // Returns a promise that is satisfied when room code is evaluated to valid or invalid
     isValidRoomCode(code) {
         return db.ref("games/" + code).once("value").then(
             snapshot => snapshot.exists()
         )
     }
 
+    /**
+     * Creates a new user and adds them to an existing room
+     */
     handleRoomCodeSubmit(event) {
         event.preventDefault()
         let code = this.state.roomCode;
         this.isValidRoomCode(code).then((isValid) => {
             if (isValid) {
-                this.props.onSetRoomCode(code);
-                
                 // Add the user to the room
                 let userID = db.ref("games/" + code + "/memberIDs").push({
                     name: this.state.name
                 }).key;
+
+                this.props.onSetRoomCode(code);
                 this.props.onSetUserID(userID);
-     
                 this.props.onSetAnswerer(false);
                 this.setState({
                     settingUpGame: true
@@ -122,9 +119,7 @@ export default class Welcome extends Component {
             } else {
                 alert("Invalid room code!")
             }
-        })
-        // TODO: add new user to database
-        
+        })    
     }
 
     render() {

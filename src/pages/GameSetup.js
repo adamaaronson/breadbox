@@ -12,7 +12,13 @@ export default class GameSetup extends Component {
         };
 
         this.handleThingChange = this.handleThingChange.bind(this)
-        this.handleSetThing = this.handleSetThing.bind(this)
+        this.handleSubmitThing = this.handleSubmitThing.bind(this)
+    }
+
+    handleThingChange(event) {
+        this.setState({
+            thing: event.target.value
+        })
     }
 
     /* Updates in real-time as players join the game */
@@ -28,14 +34,8 @@ export default class GameSetup extends Component {
         })
     }
 
-    handleThingChange(event) {
-        this.setState({
-            thing: event.target.value
-        })
-    }
-
+    /* Called after the Answerer submits a "thing". Starts the game round. */
     handleSubmitThing(event) {
-        // TODO: Launch a new game as the Answerer
         event.preventDefault();
         this.props.onSubmitThing(this.state.thing);
         this.setState({
@@ -78,7 +78,7 @@ export default class GameSetup extends Component {
                                 Waiting for answerer to pick a thing...
                             </h3>
                             <Link to="/game">
-                                {/* TODO: listen for answerer choice */}
+                                {/* TODO: Is this necessary */}
                                 Start guessing
                             </Link>
                         </div>
@@ -86,7 +86,6 @@ export default class GameSetup extends Component {
                     )} 
                 </div>
             )
-            
         )
     }
 }

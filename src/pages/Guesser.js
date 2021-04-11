@@ -8,7 +8,8 @@ export default class Guesser extends Component {
         super(props);
         this.state = {
             question: '',
-            guess: ''
+            guess: '',
+            finished: false
         }
 
         this.handleQuestionChange = this.handleQuestionChange.bind(this);
@@ -29,9 +30,18 @@ export default class Guesser extends Component {
         })
     }
 
+    async componentDidMount() {
+        db.ref('games/' + this.props.roomCode + "/finished").on("value", (snapshot) => {
+            if (snapshot.val()) {
+                this.setState({
+                    finished: true
+                });
+            }
+        })
+    }
+
     handleQuestionSubmit(event) {
         event.preventDefault();
-        // TODO: send question to guesstion queue
         db.ref("games/" + this.props.roomCode + "/questions").push({
             timestamp: (new Date()).getTime(),
             questionText: this.state.question,
@@ -46,7 +56,6 @@ export default class Guesser extends Component {
 
     handleGuessSubmit(event) {
         event.preventDefault();
-        // TODO: send guess to guesstion queue
         db.ref("games/" + this.props.roomCode + "/questions").push({
             timestamp: (new Date()).getTime(),
             questionText: this.state.guess,

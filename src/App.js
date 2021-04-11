@@ -1,6 +1,6 @@
 import './css/App.css'
 import React, { Component } from 'react'
-import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom'
+import {BrowserRouter as Router, Route } from 'react-router-dom'
 import Welcome from './pages/Welcome.js'
 import GameSetup from './pages/GameSetup.js'
 import Guesser from './pages/Guesser.js'
@@ -16,7 +16,6 @@ export default class App extends Component {
             roomCode: '',
             thing: '',
             isAnswerer: true,
-            winner: ''
         }
 
         this.submitThing = this.submitThing.bind(this);
@@ -25,7 +24,7 @@ export default class App extends Component {
         this.setRoomCode = this.setRoomCode.bind(this);
         this.setUserID = this.setUserID.bind(this);
         this.setUserName = this.setUserName.bind(this);
-        this.setWinner = this.setWinner.bind(this);
+        //this.setWinner = this.setWinner.bind(this);
     }
 
     /* Functions for child components to control App state */
@@ -72,11 +71,11 @@ export default class App extends Component {
         })
     }
 
-    setWinner(userName) {
-        this.setState({
-            winner: userName
-        })
-    }
+    // setWinner(userName) {
+    //     this.setState({
+    //         winner: userName
+    //     })
+    // }
 
     render() {
         return (
@@ -109,7 +108,7 @@ export default class App extends Component {
                                 userID={this.state.userID}
                                 userName={this.state.userName}
                                 roomCode={this.state.roomCode}
-                                onSetWinner={this.setWinner}
+                                // onSetWinner={this.setWinner}
                                 thing={this.state.thing}
                             />
                         ) : (
@@ -125,7 +124,7 @@ export default class App extends Component {
                             roomCode={this.state.roomCode}
                             isAnswerer={this.state.isAnswerer}
                             thing={this.state.thing}
-                            winner={this.state.winner}
+                            // winner={this.state.winner}
                             onSetNextAnswerer={this.setNextAnswerer}
                         />
                     )}/>

@@ -5,14 +5,13 @@ export default class Endgame extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentPlayers: []
+            currentPlayers: [],
+            winnerName: ''
         };
     }
 
-    // TODO: Not any of this!
-
     async componentDidMount() {
-        // Load in all the current players with once
+        // Load in all the current players
         db.ref("games/" + this.props.roomCode + "/memberIDs").on('value', (snapshot) => {
             console.log(snapshot);
             snapshot.forEach((player) => {
@@ -25,16 +24,23 @@ export default class Endgame extends Component {
                 });
             })
         })
+
+        // Load in the game winner
+        db.ref("games/" + this.props.roomCode + "/winnerName").on('value', (snapshot) => {
+            this.setState({
+                winnerName: snapshot.val()
+            })
+        })
     }
     
     setNextAnswerer(player) {
-        this.props.onSetNextAnswerer()
+        this.props.onSetNextAnswerer(player)
     }
 
     render() {
         return (
             <div>
-                <h2>{this.props.winner} won the game!</h2>
+                <h2>{this.state.winnerName} won the game!</h2>
                 <h2>The thing was {this.props.thing}</h2>
 
                 {this.props.isAnswerer ? (

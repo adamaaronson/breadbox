@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import QuestionLog from '../components/QuestionLog.js'
+import {BrowserRouter as Router, Link, Route, Redirect} from 'react-router-dom'
 import db from '../services/firebase.js';
 
 export default class Guesser extends Component {
@@ -34,7 +35,6 @@ export default class Guesser extends Component {
         db.ref("games/" + this.props.roomCode + "/questions").push({
             timestamp: (new Date()).getTime(),
             questionText: this.state.question,
-            userID: this.props.userID,
             userName: this.props.userName,
             isGuess: false,
             answer: null
@@ -50,7 +50,7 @@ export default class Guesser extends Component {
         db.ref("games/" + this.props.roomCode + "/questions").push({
             timestamp: (new Date()).getTime(),
             questionText: this.state.guess,
-            userID: this.props.userID,
+            userName: this.props.userName,
             isGuess: true,
             answer: null
         })
@@ -60,7 +60,9 @@ export default class Guesser extends Component {
     }
 
     render() {
-        return (
+        return this.state.finished ? (
+            <Redirect to="/end" />
+        ) : (
             <div>
                 <h2>
                     Your name is {this.props.userName}.
@@ -99,7 +101,7 @@ export default class Guesser extends Component {
                     </button>
                 </form>
 
-                <QuestionLog />
+                <QuestionLog roomCode={this.props.roomCode}/>
             </div>
         )
     }

@@ -86,9 +86,8 @@ export default class GameSetup extends Component {
                             <h3>
                                 Waiting for answerer to pick a thing...
                             </h3>
-                        </div>
-                        
-                    )} 
+                        </div> 
+                    )}
                 </div>
             )
         )

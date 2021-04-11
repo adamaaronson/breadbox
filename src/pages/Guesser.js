@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import QuestionLog from '../components/QuestionLog.js'
+import db from '../services/firebase.js';
 
 export default class Guesser extends Component {
     constructor(props) {
         super(props);
         this.state = {
             question: '',
-            guess: '',
-            isGuessing: false
+            guess: ''
         }
 
         this.handleQuestionChange = this.handleQuestionChange.bind(this);
@@ -30,10 +30,15 @@ export default class Guesser extends Component {
 
     handleQuestionSubmit(event) {
         event.preventDefault();
-        this.setState({
-            isGuessing: false
-        })
         // TODO: send question to guesstion queue
+        db.ref("games/" + this.props.roomCode + "/questions").push({
+            timestamp: (new Date()).getTime(),
+            questionText: this.state.question,
+            userID: this.props.userID,
+            userName: this.props.userName,
+            isGuess: false,
+            answer: null
+        })
         this.setState({
             question: ''
         })
@@ -41,10 +46,14 @@ export default class Guesser extends Component {
 
     handleGuessSubmit(event) {
         event.preventDefault();
-        this.setState({
-            isGuessing: true
-        })
         // TODO: send guess to guesstion queue
+        db.ref("games/" + this.props.roomCode + "/questions").push({
+            timestamp: (new Date()).getTime(),
+            questionText: this.state.guess,
+            userID: this.props.userID,
+            isGuess: true,
+            answer: null
+        })
         this.setState({
             guess: ''
         })
@@ -53,6 +62,9 @@ export default class Guesser extends Component {
     render() {
         return (
             <div>
+                <h2>
+                    Your name is {this.props.userName}.
+                </h2>
                 <p>
                     Answerer is thinking of something...
                 </p>

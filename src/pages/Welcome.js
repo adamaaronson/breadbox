@@ -15,6 +15,7 @@ export default class Welcome extends Component {
         }
 
         this.handleNameChange = this.handleNameChange.bind(this);
+        this.handleNameSubmit = this.handleNameSubmit.bind(this);
         this.handleRoomCodeChange = this.handleRoomCodeChange.bind(this);
         this.handleCreateRoomClick = this.handleCreateRoomClick.bind(this);
         this.handleJoinRoomClick = this.handleJoinRoomClick.bind(this);
@@ -26,6 +27,10 @@ export default class Welcome extends Component {
         this.setState({
             name: event.target.value
         })
+    }
+
+    handleNameSubmit(event) {
+        event.preventDefault();
     }
 
     handleRoomCodeChange(event) {
@@ -73,6 +78,7 @@ export default class Welcome extends Component {
         db.ref().update(updates);
 
         this.props.onSetUserID(userID);
+        this.props.onSetUserName(this.state.name);
         this.props.onSetRoomCode(roomCode);
 
         this.props.onSetAnswerer(true);
@@ -112,6 +118,7 @@ export default class Welcome extends Component {
 
                 this.props.onSetRoomCode(code);
                 this.props.onSetUserID(userID);
+                this.props.onSetUserName(this.state.name);
                 this.props.onSetAnswerer(false);
                 this.setState({
                     settingUpGame: true
@@ -129,7 +136,7 @@ export default class Welcome extends Component {
             ) : (
                 <div className="welcome-page">
                     {/* Enter the user name */}
-                    <form className="name-form">
+                    <form className="name-form" onSubmit={this.handleNameSubmit}>
                         <label htmlFor="enter-name">
                             What's your name?
                         </label>

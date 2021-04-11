@@ -11,6 +11,7 @@ export default class App extends Component {
         super(props);
         this.state = {
             userID: '',
+            userName: '',
             roomCode: '',
             thing: '', // TODO: Should we put this in the DB instead?
             isAnswerer: true,
@@ -20,6 +21,7 @@ export default class App extends Component {
         this.setAnswerer = this.setAnswerer.bind(this);
         this.setRoomCode = this.setRoomCode.bind(this);
         this.setUserID = this.setUserID.bind(this);
+        this.setUserName = this.setUserName.bind(this);
     }
 
     /* Functions for child components to control App state */
@@ -48,6 +50,12 @@ export default class App extends Component {
         })
     }
 
+    setUserName(userName) {
+        this.setState({
+            userName: userName
+        })
+    }
+
     render() {
         return (
             <Router>
@@ -61,6 +69,7 @@ export default class App extends Component {
                             onSetRoomCode={this.setRoomCode}
                             onSetAnswerer={this.setAnswerer}
                             onSetUserID={this.setUserID}
+                            onSetUserName={this.setUserName}
                         />
                     )}/>
 
@@ -76,11 +85,15 @@ export default class App extends Component {
                         this.state.isAnswerer ? (
                             <Answerer
                                 userID={this.state.userID}
+                                userName={this.state.userName}
+                                roomCode={this.state.roomCode}
                                 thing={this.state.thing}
                             />
                         ) : (
                             <Guesser
                                 userID={this.state.userID}
+                                userName={this.state.userName}
+                                roomCode={this.state.roomCode}
                             />
                         )
                     )}/>

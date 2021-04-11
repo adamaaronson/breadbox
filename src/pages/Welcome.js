@@ -141,7 +141,7 @@ export default class Welcome extends Component {
                         <Header />
                         {/* Enter the user name */}
                         <form className="name-form" onSubmit={this.handleNameSubmit}>
-                            <label htmlFor="enter-name">
+                            <label for="enter-name" className="enter-name-label">
                                 What's your name?
                             </label>
                             <input
@@ -170,11 +170,13 @@ export default class Welcome extends Component {
                         </button>
 
                         {/* Joins an existing room upon join code entry. */}
+                        
                         {this.state.joiningRoom &&
+                        <>
+                            <div className="enter-room-code-label">
+                                Enter room code:
+                            </div>
                             <form className="room-code-form" onSubmit={this.handleRoomCodeSubmit}>
-                                <label htmlFor="enter-room-code">
-                                    Enter room code:
-                                </label>
                                 <input
                                     className="enter-room-code"
                                     id="enter-room-code"
@@ -187,6 +189,7 @@ export default class Welcome extends Component {
                                     Submit
                                 </button>
                             </form>
+                        </>
                         }
                     </div>
                 </div>

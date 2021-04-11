@@ -79,7 +79,7 @@ export default class Answerer extends Component {
         return this.state.finished ? (
             <Redirect to="/end" />
         ) : (
-            <div className="answerer-page">
+            <div className="game-page answerer-page">
                 <Header />
                 <h2>
                     Your name is {this.props.userName}.

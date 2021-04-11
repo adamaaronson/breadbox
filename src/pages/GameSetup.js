@@ -58,7 +58,7 @@ export default class GameSetup extends Component {
             this.state.beginningGame ? (
                 <Redirect to="/game" />
             ) : (
-                <div className="game-setup-page">
+                <div className="game-page game-setup-page">
                     <Header />
                     {this.props.isAnswerer ? (
                         <h1>You're creating a new game!</h1>

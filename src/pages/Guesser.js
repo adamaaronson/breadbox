@@ -32,7 +32,6 @@ export default class Guesser extends Component {
 
     handleQuestionSubmit(event) {
         event.preventDefault();
-        // TODO: send question to guesstion queue
         db.ref("games/" + this.props.roomCode + "/questions").push({
             timestamp: (new Date()).getTime(),
             questionText: this.state.question,
@@ -47,7 +46,6 @@ export default class Guesser extends Component {
 
     handleGuessSubmit(event) {
         event.preventDefault();
-        // TODO: send guess to guesstion queue
         db.ref("games/" + this.props.roomCode + "/questions").push({
             timestamp: (new Date()).getTime(),
             questionText: this.state.guess,
@@ -64,7 +62,7 @@ export default class Guesser extends Component {
         return this.state.finished ? (
             <Redirect to="/end" />
         ) : (
-            <div className="guesser-page">
+            <div className="game-page guesser-page">
                 <Header />
 
                 <form className="question-form" onSubmit={this.handleQuestionSubmit}>

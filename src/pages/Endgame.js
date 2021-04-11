@@ -34,7 +34,7 @@ export default class Endgame extends Component {
 
     render() {
         return (
-            <div className="endgame-page">
+            <div className="game-page endgame-page">
                 <Header />
                 <h2>{this.props.winner} won the game!</h2>
                 <h2>The thing was {this.props.thing}</h2>

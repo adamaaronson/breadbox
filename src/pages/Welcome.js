@@ -134,7 +134,7 @@ export default class Welcome extends Component {
     render() {
         return (
             this.state.settingUpGame ? (
-                <Redirect to="/setup" />
+                <Redirect to="./setup" />
             ) : (
                 <div className="welcome-page-wrapper">
                     <div className="welcome-page">

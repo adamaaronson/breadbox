@@ -72,7 +72,7 @@ export default class Guesser extends Component {
 
     render() {
         return this.state.finished ? (
-            <Redirect to="/end" />
+            <Redirect to="./end" />
         ) : (
             <div className="game-page guesser-page">
                 <Header />

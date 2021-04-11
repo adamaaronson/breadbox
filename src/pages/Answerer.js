@@ -90,7 +90,7 @@ export default class Answerer extends Component {
     render() {
         let noQuestions = this.state.questions.length === 0;
         return this.state.finished ? (
-            <Redirect to="/end" />
+            <Redirect to="./end" />
         ) : (
             <div className="game-page answerer-page">
                 <Header />

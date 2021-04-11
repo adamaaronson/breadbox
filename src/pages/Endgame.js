@@ -83,7 +83,7 @@ export default class Endgame extends Component {
 
     render() {
         return this.state.nextAnswererSelected ? (
-            <Redirect to="/setup" />
+            <Redirect to="./setup" />
         ) : (
             <div className="game-page endgame-page">
                 <Header />

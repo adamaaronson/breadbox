@@ -1,0 +1,74 @@
+$yellow: #EFBD0E;
+$orange: #C3791A;
+$black: #322b1e;
+$gray: #84827e;
+$light-gray: lighten($gray, 30%);
+$white: #f5eedf;
+
+$good-radius: 6px;
+$good-border: 3px solid $black;
+
+$spacing-unit: 1rem;
+
+// General stuff
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Varela Round', sans-serif;
+    color: $black;
+    box-sizing: border-box;
+}
+
+body {
+    background: $white;
+    padding: $spacing-unit * 3;
+}
+
+:disabled {
+    opacity: 0.5;
+}
+
+.app {
+    text-align: center;
+}
+
+button {
+    appearance: none;
+    background: $yellow;
+    padding: $spacing-unit / 2;
+    margin: $spacing-unit / 2;
+    display: inline-block;
+    border: $good-border;
+    border-radius: $good-radius;
+    font-size: 1em;
+    cursor: pointer;
+    transition: 0.3s transform;
+
+    &:not(:disabled):hover {
+        transform: scale(1.05);
+    }
+
+    &:disabled {
+        cursor: default;
+    }
+}
+
+input[type=text] {
+    appearance: none;
+    border: $good-border;
+    font-size: 1em;
+    padding: $spacing-unit / 2;
+
+    &:focus {
+        outline: none;
+        border-color: $yellow;
+    }
+}
+
+// Header
+
+.title {
+    font-size: $spacing-unit * 3;
+}
+

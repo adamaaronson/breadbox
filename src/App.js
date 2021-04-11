@@ -82,10 +82,6 @@ export default class App extends Component {
         return (
             <Router>
                 <div className="app">
-                    <h1 className="title">
-                        Breadbox
-                    </h1>
-
                     <Route exact path="/" render={() => (
                         <Welcome
                             onSetRoomCode={this.setRoomCode}

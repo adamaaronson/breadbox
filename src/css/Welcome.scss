@@ -1,0 +1,18 @@
+@import "App.scss";
+
+// Welcome page
+
+.welcome-page {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5em;
+    // background: red;
+    display: inline-block;
+    width: calc(min(800px, 100%));
+
+    .title {
+        font-size: $spacing-unit * 5;
+    }
+}

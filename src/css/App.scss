@@ -20,9 +20,12 @@ $spacing-unit: 1rem;
     box-sizing: border-box;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+}
+
 body {
     background: $white;
-    padding: $spacing-unit * 3;
 }
 
 :disabled {
@@ -68,7 +71,15 @@ input[type=text] {
 
 // Header
 
+.header {
+    padding-bottom: $spacing-unit;
+    border-bottom: 1px solid $gray;
+    display: inline-block;
+    margin-bottom: $spacing-unit;
+}
+
 .title {
     font-size: $spacing-unit * 3;
+    line-height: 1em;
 }
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import db from '../services/firebase.js'
+import Header from '../components/Header.js'
 
 export default class Endgame extends Component {
     constructor(props) {
@@ -33,7 +34,8 @@ export default class Endgame extends Component {
 
     render() {
         return (
-            <div>
+            <div className="endgame-page">
+                <Header />
                 <h2>{this.props.winner} won the game!</h2>
                 <h2>The thing was {this.props.thing}</h2>
 

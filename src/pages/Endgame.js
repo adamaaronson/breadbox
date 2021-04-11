@@ -13,16 +13,16 @@ export default class Endgame extends Component {
 
     async componentDidMount() {
         // Load in all the current players
-        db.ref("games/" + this.props.roomCode + "/memberIDs").on('value', (snapshot) => {
-            console.log(snapshot);
-            snapshot.forEach((player) => {
-                console.log(player)
-                this.setState({
-                    currentPlayers: [...this.state.currentPlayers, {
-                        userID: player.key,
-                        userName: player.val().name
-                    }]
+        db.ref("games/" + this.props.roomCode + "/memberIDs").on("value", snapshot => {
+            let players = []
+            snapshot.forEach((person) => {
+                players.push({
+                    userID: person.key,
+                    userName: person.val().name
                 });
+            })
+            this.setState({
+                currentPlayers: players
             })
         })
 
@@ -33,13 +33,14 @@ export default class Endgame extends Component {
             })
         })
 
+        // Load in the game "thing"
         db.ref("games/" + this.props.roomCode + "/thing").on('value', (snapshot) => {
             this.setState({
                 thing: snapshot.val()
             })
         })
     }
-    
+
     setNextAnswerer(player) {
         this.props.onSetNextAnswerer(player)
     }
@@ -49,15 +50,14 @@ export default class Endgame extends Component {
             <div>
                 <h2>{this.state.winnerName} won the game!</h2>
                 <h2>The thing was {this.state.thing}</h2>
+                <h2>Current Players: </h2>
+                {this.state.currentPlayers.map(player => (
+                    <p key={player.userID}>{player.userName}</p>
+                ))}
 
                 {this.props.isAnswerer ? (
                     <div>
                         <h3>Pick the next answerer:</h3>
-                        {this.state.currentPlayers.map(player => (
-                            <button onClick={this.setNextAnswerer(player)}>
-                                {player.userName}
-                            </button>
-                        ))}
                     </div>
                 ) : (
                     <div>

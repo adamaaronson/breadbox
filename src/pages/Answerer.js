@@ -9,6 +9,7 @@ export default class Answerer extends Component {
         this.state = {
             questions: [],
             answer: '',
+            thing: '',
             finished: false
         }
         
@@ -34,6 +35,13 @@ export default class Answerer extends Component {
                 return prevState;
             })
         });
+
+        // Load in the game "thing"
+        db.ref("games/" + this.props.roomCode + "/thing").on('value', (snapshot) => {
+            this.setState({
+                thing: snapshot.val()
+            })
+        })
 
         // Check for if the game is finished
         db.ref('games/' + this.props.roomCode + "/finished").on("value", (snapshot) => {
@@ -87,7 +95,7 @@ export default class Answerer extends Component {
                     Your name is {this.props.userName}.
                 </h2>
                 <p>You are thinking of...</p>
-                <h2>{this.props.thing}</h2>
+                <h2>{this.state.thing}</h2>
 
                 <div className="answer-area">
                     {noQuestions ? (

@@ -92,7 +92,6 @@ export default class App extends Component {
                                 userID={this.state.userID}
                                 userName={this.state.userName}
                                 roomCode={this.state.roomCode}
-                                thing={this.state.thing}
                             />
                         ) : (
                             <Guesser

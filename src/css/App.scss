@@ -109,3 +109,17 @@ input[type=text] {
     // margin-left: 5px;
 }
 
+.app {
+    position: relative;
+}
+
+.authors {
+    position: fixed;
+    width: 100%;
+    text-align: center;
+    left: 100%;
+    top: 100%;
+    transform: translate(-100%, -100%);
+    font-size: 0.7em;
+    padding: $spacing-unit / 2;
+}

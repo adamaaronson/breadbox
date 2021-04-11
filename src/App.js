@@ -7,7 +7,7 @@ import Guesser from './pages/Guesser.js'
 import Answerer from './pages/Answerer.js'
 import Endgame from './pages/Endgame.js'
 
-const IS_DEPLOY = true;
+const IS_DEPLOY = false;
 const PATH_PREFIX = "/breadbox";
 
 export default class App extends Component {
@@ -77,6 +77,9 @@ export default class App extends Component {
         return (
             <Router>
                 <div className="app">
+                    <div className="authors">
+                        Created by Adam Aaronson and Cale Wolf for HackIllinois 2021 😎
+                    </div>
                     <Route exact path={this.getRealPath("/")} render={() => (
                         <Welcome
                             onSetRoomCode={this.setRoomCode}

@@ -124,8 +124,8 @@ export default class Endgame extends Component {
                         </div>
                     </div>
                 ) : (
-                    <div>
-                        Waiting for the answerer to pick the next answer...
+                    <div className="player-name-button-header">
+                        Waiting for the next answerer to be chosen...
                     </div>
                 )}
             </div>

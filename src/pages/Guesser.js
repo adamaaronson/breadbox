@@ -94,12 +94,13 @@ export default class Guesser extends Component {
                 <div className="player-info-boxes">
                     <h3 className="player-name-box">
                         Name: {this.props.userName}
-                        Answerer: {this.state.answererName} {/* Temporary */}
                     </h3>
                     <h3 className="player-roomcode-box">
                         Room code: {this.props.roomCode}
                     </h3>
                 </div>
+
+                <h3 className="thing-youre-thinking-of">{this.state.answererName} is thinking of something...</h3>
 
                 <div className="player-body">
                 <div className="player-body-main">

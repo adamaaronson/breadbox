@@ -1,12 +1,16 @@
 @import "App.scss";
 
 .thing-announcement {
-    margin-bottom: $spacing-unit;
+    display: inline-block;
+    
 }
 
 .player-name-button-header {
     display: inline-block;
     margin-bottom: $spacing-unit;
+    padding-top: $spacing-unit;
+    border-top: 1px solid $gray;
+    margin-top: $spacing-unit;
 }
 
 .player-name-button:not(:last-child) {

@@ -20,10 +20,50 @@
 .answerer-body {
     display: flex;
     justify-content: center;
+    max-width: 800px;
+    margin: auto;
+
+    & > * {
+        flex: 1;
+    }
 }
 
 .question-box-label {
     display: block;
     margin-top: $spacing-unit;
     margin-bottom: $spacing-unit / 2;
+}
+
+.question-answer-buttons {
+    display: flex;
+    flex-flow: column wrap;
+    // align-items: stretch;
+
+    & > * {
+        // background: red;
+        display: flex;
+        align-items: stretch;
+    }
+
+    & > * > *:not(:last-child) {
+        margin-right: $spacing-unit / 2;
+    }
+}
+
+.big-answer-buttons > * {
+    flex: 1;
+    padding: 2 * $spacing-unit;
+    margin-bottom: $spacing-unit / 2;
+}
+
+.small-answer-buttons > * {
+    flex: 1;
+}
+
+.yes-button {
+    background: $yes-color;
+}
+
+.no-button {
+    background: $no-color;
 }

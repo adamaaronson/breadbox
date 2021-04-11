@@ -99,7 +99,7 @@ export default class Answerer extends Component {
                 <div className="answerer-body">
                 <div className="answer-area">
                         {noQuestions ? (
-                            <h3 className="waiting-for-questions">
+                            <h3 className="question-box">
                                 Waiting for questions...
                             </h3>
                         ) : (
@@ -114,33 +114,41 @@ export default class Answerer extends Component {
                         )}
                         {noQuestions || !this.state.questions[0].isGuess ? (
                             <div className="question-answer-buttons">
-                                <button value="Yes" disabled={noQuestions} onClick={this.handleClickAnswer}>
-                                    Yes
-                                </button>
-                                <button value="No" disabled={noQuestions} onClick={this.handleClickAnswer}>
-                                    No
-                                </button>
-                                <button value="Sometimes" disabled={noQuestions} onClick={this.handleClickAnswer}>
-                                    Sometimes
-                                </button>
-                                <button value="Not sure" disabled={noQuestions} onClick={this.handleClickAnswer}>
-                                    Not sure
-                                </button>
-                                <button value="Irrelevant" disabled={noQuestions} onClick={this.handleClickAnswer}>
-                                    Irrelevant
-                                </button>
+                                <div className="big-answer-buttons">
+                                    <button className="yes-button" value="Yes" disabled={noQuestions} onClick={this.handleClickAnswer}>
+                                        Yes
+                                    </button>
+                                    <button className="no-button" value="No" disabled={noQuestions} onClick={this.handleClickAnswer}>
+                                        No
+                                    </button>
+                                </div>
+                                <div className="small-answer-buttons">
+                                    <button value="Sometimes" disabled={noQuestions} onClick={this.handleClickAnswer}>
+                                        Sometimes
+                                    </button>
+                                    <button value="Not sure" disabled={noQuestions} onClick={this.handleClickAnswer}>
+                                        Not sure
+                                    </button>
+                                    <button value="Irrelevant" disabled={noQuestions} onClick={this.handleClickAnswer}>
+                                        Irrelevant
+                                    </button>
+                                </div>
                             </div>
                         ) : (
-                            <div className="guess-answer-buttons">
-                                <button value="Yes" disabled={noQuestions} onClick={this.handleClickAnswer}>
-                                    Yes
-                                </button>
-                                <button value="No" disabled={noQuestions} onClick={this.handleClickAnswer}>
-                                    No
-                                </button>
-                                <button value="Close" disabled={noQuestions} onClick={this.handleClickAnswer}>
-                                    Close
-                                </button>
+                            <div className="question-answer-buttons">
+                                <div className="big-answer-buttons">
+                                    <button className="yes-button" value="Yes!" disabled={noQuestions} onClick={this.handleClickAnswer}>
+                                        Yes!
+                                    </button>
+                                    <button className="no-button" value="No" disabled={noQuestions} onClick={this.handleClickAnswer}>
+                                        No
+                                    </button>
+                                </div>
+                                <div className="small-answer-buttons">
+                                    <button value="Close!" disabled={noQuestions} onClick={this.handleClickAnswer}>
+                                        Close!
+                                    </button>
+                                </div>
                             </div>
                         )}
                     </div>

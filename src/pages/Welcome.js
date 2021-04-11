@@ -139,6 +139,9 @@ export default class Welcome extends Component {
                 <div className="welcome-page-wrapper">
                     <div className="welcome-page">
                         <Header />
+                        <p className="game-description">
+                            Play Twenty Questions online with your friends!
+                        </p>
                         {/* Enter the user name */}
                         <form className="name-form" onSubmit={this.handleNameSubmit}>
                             <label htmlFor="enter-name" className="enter-name-label">

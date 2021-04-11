@@ -1,10 +1,11 @@
 $yellow: #EFBD0E;
-// $orange: #C3791A;
 $orange: #e08714;
 $black: #322b1e;
 $gray: #84827e;
 $light-gray: lighten($gray, 30%);
 $white: #f5eedf;
+$yes-color: #81d274;
+$no-color: #e46565;
 
 $good-radius: 6px;
 $good-border: 3px solid $black;
@@ -27,6 +28,11 @@ h1, h2, h3, h4, h5, h6 {
 
 body {
     background: $white;
+    font-size: 1.4rem;
+}
+
+.game-page {
+    padding: $spacing-unit * 2;
 }
 
 :disabled {
@@ -78,8 +84,28 @@ input[type=text] {
     margin-bottom: $spacing-unit;
 }
 
+.title-box {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    height: 8rem;
+    margin-right: $spacing-unit/2;
+}
+
 .title {
-    font-size: $spacing-unit * 3;
+    font-size: 5rem;
     line-height: 1em;
+    text-align: left;
+    // margin-top: 8px;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    // text-align: left;
+    // margin-left: 5px;
 }
 

@@ -1,0 +1,36 @@
+@import "App.scss";
+
+.game-setup-header {
+    margin-bottom: $spacing-unit;
+}
+
+.room-code-box {
+    background: $yellow;
+    padding: $spacing-unit;
+    display: inline-block;
+    margin-bottom: $spacing-unit;
+    border: $good-border;
+}
+
+.current-players-list {
+    margin-bottom: $spacing-unit;
+}
+
+.thing-input-label {
+    display: block;
+}
+
+.thing-input-box {
+    margin-top: $spacing-unit;
+    margin-right: $spacing-unit / 2;
+}
+
+.thing-input-form {
+    display: inline-block;
+    padding-top: $spacing-unit;
+    border-top: 1px solid $gray;
+}
+
+.question-box {
+    margin-bottom: $spacing-unit;
+}

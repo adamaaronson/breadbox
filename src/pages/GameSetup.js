@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Header from '../components/Header.js'
 import {BrowserRouter as Router, Link, Route, Redirect} from 'react-router-dom'
 import db from '../services/firebase';
+import '../css/GameSetup.scss'
 
 export default class GameSetup extends Component {
     constructor(props) {
@@ -65,27 +66,49 @@ export default class GameSetup extends Component {
             ) : (
                 <div className="game-page game-setup-page">
                     <Header />
-                    {this.props.isAnswerer ? (
-                        <h1>You're creating a new game!</h1>
-                    ) : (
-                        <h1>You joined the game!</h1>
-                    )}
                     
-                    <h2>Send your friends this code: {this.props.roomCode}</h2>
-                    <h2>Current Players: {this.state.currentPlayers.join(", ")}</h2>
+                    <h2 className="game-setup-header">
+                        You're {this.props.isAnswerer ? "answering" : "guessing"} this round!
+                    </h2>
+
+                    <div className="room-code-box">
+                        <h3 className="send-the-code">
+                            Send your friends this code:
+                        </h3>
+                        <h1 className="room-code">
+                            {this.props.roomCode}
+                        </h1>
+                    </div>
+
+                    <div className="current-players-list">
+                        <h3 className="current-players-header">
+                            People playing:
+                        </h3>
+                        <h2>
+                            {this.state.currentPlayers.join(", ")}
+                        </h2>
+                    </div>
+
+                    
+
+                    
                     
                     {this.props.isAnswerer ? (
-                        <form onSubmit={this.handleSubmitThing}>
-                            <label htmlFor="thing-input-box">
-                                Pick a thing:
-                            </label>
+                        <form className="thing-input-form" onSubmit={this.handleSubmitThing}>
+                            <h2 className="thing-input-label" htmlFor="thing-input-box">
+                                What are you thinking of?
+                            </h2>
+                            <h4>
+                                (don't tell anyone!)
+                            </h4>
                             <input
+                                className="thing-input-box"
                                 id="thing-input-box"
                                 type="text"
                                 onChange={this.handleThingChange}>
                             </input>
                             <button type="submit" disabled={this.state.thing === ""}>
-                                Begin
+                                Start game!
                             </button>
                         </form>
                     ) : (

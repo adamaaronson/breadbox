@@ -73,6 +73,10 @@ export default class Endgame extends Component {
         })
     }
 
+    componentWillUnmount() {
+        db.ref("games/" + this.props.roomCode + "/finished").off();
+    }
+
     setNextAnswerer(event) {
         event.preventDefault();
 

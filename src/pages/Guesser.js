@@ -11,7 +11,8 @@ export default class Guesser extends Component {
         this.state = {
             question: '',
             guess: '',
-            finished: false
+            finished: false,
+            answererName: '',
         }
 
         this.handleQuestionChange = this.handleQuestionChange.bind(this);
@@ -40,6 +41,20 @@ export default class Guesser extends Component {
                 });
             }
         })
+
+        // Loads in the answerer's name
+        db.ref('games/' + this.props.roomCode + "/answererID").once("value", (snapshot) => {
+            db.ref('games/' + this.props.roomCode + "/memberIDs/" + snapshot.val()).once("value", (snap) => {
+                this.setState({
+                    answererName: snap.val().name
+                })
+                console.log(snap.val().name)
+            })
+        })
+    }
+
+    componentWillUnmount() {
+        db.ref('games/' + this.props.roomCode + "/finished").off();
     }
 
     handleQuestionSubmit(event) {
@@ -79,6 +94,7 @@ export default class Guesser extends Component {
                 <div className="player-info-boxes">
                     <h3 className="player-name-box">
                         Name: {this.props.userName}
+                        Answerer: {this.state.answererName} {/* Temporary */}
                     </h3>
                     <h3 className="player-roomcode-box">
                         Room code: {this.props.roomCode}
@@ -93,7 +109,7 @@ export default class Guesser extends Component {
                             </label>
                             <div className="guesser-input-wrapper">
                                 <input
-                                    class="guesser-input"
+                                    className="guesser-input"
                                     id="question-input-box"
                                     type="text"
                                     value={this.state.question}
@@ -112,7 +128,7 @@ export default class Guesser extends Component {
                             </label>
                             <div className="guesser-input-wrapper">
                                 <input
-                                    class="guesser-input"
+                                    className="guesser-input"
                                     id="guess-input-box"
                                     type="text"
                                     value={this.state.guess}

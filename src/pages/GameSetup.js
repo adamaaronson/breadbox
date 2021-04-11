@@ -10,7 +10,8 @@ export default class GameSetup extends Component {
         this.state = {
             thing: '',
             currentPlayers: [],
-            beginningGame: false
+            beginningGame: false,
+            answererName: ''
         };
 
         this.handleThingChange = this.handleThingChange.bind(this)
@@ -46,6 +47,16 @@ export default class GameSetup extends Component {
                     beginningGame: true
                 })
             }
+        })
+
+        // Loads in the answerer's name
+        db.ref('games/' + this.props.roomCode + "/answererID").once("value", (snapshot) => {
+            db.ref('games/' + this.props.roomCode + "/memberIDs/" + snapshot.val()).once("value", (snap) => {
+                this.setState({
+                    answererName: snap.val().name
+                })
+                console.log(snap.val().name)
+            })
         })
     }
 
@@ -119,7 +130,7 @@ export default class GameSetup extends Component {
                     ) : (
                         <div>
                             <h3>
-                                Waiting for answerer to pick a thing...
+                                Waiting for {this.state.answererName} to pick a thing...
                             </h3>
                         </div> 
                     )}

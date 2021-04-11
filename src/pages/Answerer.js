@@ -22,6 +22,7 @@ export default class Answerer extends Component {
      * Updates the question "queue" as Guessers ask questions/guesses
      */
     async componentDidMount() {
+
         // Update the question queue
         var questionsRef = db.ref("games/" + this.props.roomCode + "/questions");
         questionsRef.on('child_added', (data) => {
@@ -39,7 +40,7 @@ export default class Answerer extends Component {
         });
 
         // Load in the game "thing"
-        db.ref("games/" + this.props.roomCode + "/thing").on('value', (snapshot) => {
+        db.ref("games/" + this.props.roomCode + "/thing").once('value', (snapshot) => {
             this.setState({
                 thing: snapshot.val()
             })
@@ -55,6 +56,11 @@ export default class Answerer extends Component {
         })
     }
 
+    componentWillUnmount() {
+        db.ref("games/" + this.props.roomCode + "/questions").off();
+        db.ref('games/' + this.props.roomCode + "/finished").off();
+    }
+
     /**
      * Marks the question/guess with an answer and updates the queue
      */
@@ -65,15 +71,6 @@ export default class Answerer extends Component {
         db.ref().update(updates);
         
         if (this.state.questions[0].isGuess && event.target.value.startsWith("Yes")) {
-
-            // TODO: Track winner in the database
-            // this.setState({
-                
-            //     winner: this.state.questions[0].userName
-            // })
-
-            // this.props.onSetWinner(this.state.questions[0].userName)
-
             updates = {};
             updates["/games/" + this.props.roomCode + "/finished"] = true;
             updates["/games/" + this.props.roomCode + "/winnerName"] = this.state.questions[0].userName;

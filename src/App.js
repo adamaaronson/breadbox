@@ -7,7 +7,7 @@ import Guesser from './pages/Guesser.js'
 import Answerer from './pages/Answerer.js'
 import Endgame from './pages/Endgame.js'
 
-const IS_DEPLOY = false;
+const IS_DEPLOY = true;
 const PATH_PREFIX = "/breadbox";
 
 export default class App extends Component {

@@ -55,12 +55,15 @@ export default class Endgame extends Component {
         })
 
         // Listen for when the next answerer is selected
-        db.ref("games/" + this.props.roomCode + "/answererID").on('value', (snapshot) => {
-            this.props.onSetAnswerer(snapshot.val() === this.props.userID);
-
-            if (!this.state.firstLoad) { // && snapshot.val() !== this.state.prevAnswererID
+        const answerIDRef = db.ref("games/" + this.props.roomCode + "/answererID");
+        db.ref("games/" + this.props.roomCode + "/finished").on('value', (snapshot) => {
+            answerIDRef.once('value', (snapshot) => {
+                this.props.onSetAnswerer(snapshot.val() === this.props.userID);
+            })
+            
+            if (!this.state.firstLoad) {
                 this.setState({
-                    nextAnswererSelected: true // test
+                    nextAnswererSelected: true
                 });
             }
 

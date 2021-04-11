@@ -49,6 +49,11 @@ export default class GameSetup extends Component {
         })
     }
 
+    componentWillUnmount() {
+        db.ref("games/" + this.props.roomCode + "/memberIDs").off();
+        db.ref("games/" + this.props.roomCode + "/started").off();
+    }
+
     /* Called after the Answerer submits a "thing". Starts the game round. */
     handleSubmitThing(event) {
         event.preventDefault();

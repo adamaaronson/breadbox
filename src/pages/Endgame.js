@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import db from '../services/firebase.js'
 import Header from '../components/Header.js'
-import { BrowserRouter as Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import '../css/Endgame.scss'
 
 export default class Endgame extends Component {

@@ -14,21 +14,14 @@ export default class QuestionLog extends Component {
         this.setState({
             awaitQuestions: true
         })
+        db.ref("games/" + this.props.roomCode + "/questions").on('child_added', (data) => {
+            if (this.state.awaitQuestions) {
+                this.appendQuestion(data.val());
+            }
+        })
         db.ref("games/" + this.props.roomCode + "/questions").on('child_changed', (data) => {
             if (this.state.awaitQuestions) {
-                let newQuestionData = {
-                    questionText: data.val().questionText,
-                    userName: data.val().userName,
-                    answer: data.val().answer,
-                    isGuess: data.val().isGuess
-                };
-
-                let newQuestions = this.state.questions;
-                newQuestions.push(newQuestionData);
-                
-                this.setState({
-                    questions: newQuestions
-                })
+                this.updateQuestion(data.val());
             }
         })
     }
@@ -39,13 +32,39 @@ export default class QuestionLog extends Component {
         })
     }
 
+    appendQuestion(data) {
+        let newQuestionData = {
+            questionText: data.questionText,
+            userName: data.userName,
+            answer: data.answer,
+            isGuess: data.isGuess
+        };
+
+        this.setState(prevState => ({
+            questions: [...prevState.questions, newQuestionData]
+        }))
+    }
+
+    updateQuestion(data) {
+        const updatedQuestion = {
+            questionText: data.questionText,
+            userName: data.userName,
+            answer: data.answer,
+            isGuess: data.isGuess
+        };
+        const index = this.state.questions.findIndex((question) => question.questionText === data.questionText);
+        let newQuestions = this.state.questions;
+        newQuestions.splice(index, 1, updatedQuestion);
+        this.setState({questions: newQuestions});
+    }
+
     render() {
         return (
             <div>
                 <h3 className="question-log-title">
                     Answer log
                 </h3>
-                {this.state.questions.length == 0 ? (
+                {this.state.questions.length === 0 ? (
                     <div className="no-questions">
                         No questions answered!
                     </div>
@@ -62,9 +81,12 @@ export default class QuestionLog extends Component {
                                 <span className="question-log-question">
                                     {question.questionText}
                                 </span>
-                                <span className={"question-log-answer " + (question.answer.startsWith("No") ? "answer-no" : "") + (question.answer.startsWith("Yes") ? "answer-yes" : "")}>
-                                    {question.answer}
-                                </span>
+                                {!question.answer ? (
+                                    <span className="unanswered-question">No answer</span>
+                                ) : (
+                                    <span className={"question-log-answer " + (question.answer.startsWith("No") ? "answer-no" : "") + (question.answer.startsWith("Yes") ? "answer-yes" : "")}>
+                                        {question.answer}
+                                    </span>)}
                             </React.Fragment>
                         )}
                     </div>

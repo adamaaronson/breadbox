@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import QuestionLog from '../components/QuestionLog.js'
 import Header from '../components/Header.js'
-import {BrowserRouter as Router, Link, Route, Redirect} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 import db from '../services/firebase.js'
 import '../css/Player.scss'
 
@@ -22,21 +22,21 @@ export default class Answerer extends Component {
      * Updates the question "queue" as Guessers ask questions/guesses
      */
     async componentDidMount() {
-
         // Update the question queue
         var questionsRef = db.ref("games/" + this.props.roomCode + "/questions");
         questionsRef.on('child_added', (data) => {
-            const newQuestion = {
-                questionID: data.key,
-                userName: data.val().userName,
-                questionText: data.val().questionText,
-                isGuess: data.val().isGuess
-            };
-
-            this.setState(prevState => {
-                prevState.questions.push(newQuestion);
-                return prevState;
-            })
+            if (!data.val().answer) {
+                const newQuestion = {
+                    questionID: data.key,
+                    userName: data.val().userName,
+                    questionText: data.val().questionText,
+                    isGuess: data.val().isGuess
+                };
+                this.setState(prevState => {
+                    prevState.questions.push(newQuestion);
+                    return prevState;
+                })
+            }
         });
 
         // Load in the game "thing"

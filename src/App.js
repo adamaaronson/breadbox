@@ -14,14 +14,13 @@ export default class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userID: '',
-            userName: '',
-            roomCode: '',
-            isAnswerer: true,
+            userID: sessionStorage.getItem('userID'),
+            userName: sessionStorage.getItem('userName'),
+            roomCode: sessionStorage.getItem('roomCode'),
+            isAnswerer: sessionStorage.getItem('isAnswerer') === "true",
         }
 
         this.setAnswerer = this.setAnswerer.bind(this);
-        //this.setNextAnswerer = this.setNextAnswerer.bind(this);
         this.setRoomCode = this.setRoomCode.bind(this);
         this.setUserID = this.setUserID.bind(this);
         this.setUserName = this.setUserName.bind(this);
@@ -32,37 +31,29 @@ export default class App extends Component {
     setAnswerer(isAnswerer) {
         this.setState({
             isAnswerer: isAnswerer
-        })
+        });
+        sessionStorage.setItem('isAnswerer', isAnswerer);
     }
-
-    // setNextAnswerer(nextAnswerer) {
-    //     if (nextAnswerer.userID === this.state.userID) {
-    //         this.setState({
-    //             isAnswerer: true
-    //         })
-    //     } else {
-    //         this.setState({
-    //             isAnswerer: false
-    //         })
-    //     }
-    // }
 
     setRoomCode(roomCode) {
         this.setState({
             roomCode: roomCode
         })
+        sessionStorage.setItem('roomCode', roomCode);
     }
 
     setUserID(userID) {
         this.setState({
             userID: userID
         })
+        sessionStorage.setItem('userID', userID);
     }
 
     setUserName(userName) {
         this.setState({
             userName: userName
         })
+        sessionStorage.setItem('userName', userName);
     }
 
     getRealPath(basicPath) {
@@ -74,6 +65,7 @@ export default class App extends Component {
     }
 
     render() {
+        console.log(this.state.isAnswerer);
         return (
             <Router>
                 <div className="app">

@@ -65,7 +65,6 @@ export default class App extends Component {
     }
 
     render() {
-        console.log(this.state.isAnswerer);
         return (
             <Router>
                 <div className="app">

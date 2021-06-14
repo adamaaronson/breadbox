@@ -1,7 +1,7 @@
 import '../css/Welcome.scss'
 import React, { Component } from 'react'
 import Header from '../components/Header.js'
-import {BrowserRouter as Router, Link, Route, Redirect} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 import db from '../services/firebase.js'
 
 const ROOM_CODE_LENGTH = 5;

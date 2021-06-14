@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Header from '../components/Header.js'
-import {BrowserRouter as Router, Link, Route, Redirect} from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import db from '../services/firebase';
 import '../css/GameSetup.scss'
 
@@ -55,7 +55,7 @@ export default class GameSetup extends Component {
                 this.setState({
                     answererName: snap.val().name
                 })
-                console.log(snap.val().name)
+                //console.log(snap.val().name)
             })
         })
     }
@@ -105,10 +105,6 @@ export default class GameSetup extends Component {
                         </h2>
                     </div>
 
-                    
-
-                    
-                    
                     {this.props.isAnswerer ? (
                         <form className="thing-input-form" onSubmit={this.handleSubmitThing}>
                             <h2 className="thing-input-label" htmlFor="thing-input-box">

@@ -1,0 +1,9 @@
+Deployment instructions:
+
+npm run build --- builds the app
+firebase init hosting
+make sure the "build" folder is selected as the public field in firebase.json
+choose YES for configuring as single-page app
+choose NO for overwriting index.html
+npm run build again ???
+firebase deploy

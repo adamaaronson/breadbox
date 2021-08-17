@@ -1,6 +1,7 @@
 import '../css/Welcome.scss'
 import React, { Component } from 'react'
 import Header from '../components/Header.js'
+import Footer from '../components/Footer.js'
 import {Redirect} from 'react-router-dom'
 import db from '../services/firebase.js'
 
@@ -136,7 +137,8 @@ export default class Welcome extends Component {
             this.state.settingUpGame ? (
                 <Redirect to="./setup" />
             ) : (
-                <div className="welcome-page-wrapper">
+                <>
+                <div className="welcome-page-wrapper page-content">
                     <div className="welcome-page">
                         <Header />
                         <p className="game-description">
@@ -196,6 +198,8 @@ export default class Welcome extends Component {
                         }
                     </div>
                 </div>
+                <Footer/>
+                </>
             )
         )
     }

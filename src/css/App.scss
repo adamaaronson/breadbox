@@ -9,6 +9,7 @@ $no-color: #e46565;
 
 $good-radius: 6px;
 $good-border: 3px solid $black;
+$footer-height: 2em;
 
 $spacing-unit: 1.2rem;
 
@@ -37,6 +38,10 @@ body {
 
 :disabled {
     opacity: 0.5;
+}
+
+html {
+    height: 100%;
 }
 
 .app {
@@ -82,6 +87,11 @@ input[type=text] {
     border-bottom: 1px solid $gray;
     display: inline-block;
     margin-bottom: $spacing-unit;
+    max-width: 100vw;
+    object-fit: contain;
+    @media (max-width: 600px) {
+        transform: scale(calc(100% / 500px));
+    }
 }
 
 .title-box {
@@ -109,17 +119,16 @@ input[type=text] {
     // margin-left: 5px;
 }
 
-.app {
-    position: relative;
+// Footer
+
+.page-content {
+    min-height: calc(100vh - #{$footer-height});
 }
 
-.authors {
-    position: fixed;
-    width: 100%;
+.footer {
     text-align: center;
-    left: 100%;
-    top: 100%;
-    transform: translate(-100%, -100%);
     font-size: 0.7em;
     padding: $spacing-unit / 2;
+    background: $white;
+    z-index: 4204;
 }

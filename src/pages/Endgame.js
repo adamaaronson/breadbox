@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import db from '../services/firebase.js'
 import Header from '../components/Header.js'
+import Footer from '../components/Footer.js'
 import { Redirect } from 'react-router-dom'
 import '../css/Endgame.scss'
 
@@ -92,7 +93,8 @@ export default class Endgame extends Component {
         return this.state.nextAnswererSelected ? (
             <Redirect to="./setup" />
         ) : (
-            <div className="game-page endgame-page">
+            <>
+            <div className="game-page endgame-page page-content">
                 <Header />
                 <h2 className="winner-announcement">
                     {this.state.winnerName} won the game!
@@ -132,6 +134,8 @@ export default class Endgame extends Component {
                     
                 )}
             </div>
+            <Footer/>
+            </>
         )
     }
 }

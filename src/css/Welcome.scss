@@ -2,11 +2,13 @@
 
 // Welcome page
 
+.welcome-page-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .welcome-page {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     display: inline-block;
     width: calc(min(800px, 100%));
 

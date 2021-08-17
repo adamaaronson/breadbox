@@ -115,15 +115,17 @@ export default class GameSetup extends Component {
                             <h4>
                                 (don't tell anyone!)
                             </h4>
-                            <input
-                                className="thing-input-box"
-                                id="thing-input-box"
-                                type="text"
-                                onChange={this.handleThingChange}>
-                            </input>
-                            <button type="submit" disabled={this.state.thing === ""}>
-                                Start game!
-                            </button>
+                            <div className="thing-input-box-wrapper">
+                                <input
+                                    className="thing-input-box"
+                                    id="thing-input-box"
+                                    type="text"
+                                    onChange={this.handleThingChange}>
+                                </input>
+                                <button type="submit" disabled={this.state.thing === ""}>
+                                    Start game!
+                                </button>
+                            </div>
                         </form>
                     ) : (
                         <div>

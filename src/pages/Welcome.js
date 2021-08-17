@@ -157,22 +157,24 @@ export default class Welcome extends Component {
                             </input>
                         </form>
 
-                        {/* Create a new room, only if a name is entered */}
-                        <button
-                            className="create-room"
-                            disabled={this.state.name === ''}
-                            onClick={this.handleCreateRoomClick}>
-                            Create new room
-                        </button>
+                        <div className="room-buttons">
+                            {/* Create a new room, only if a name is entered */}
+                            <button
+                                className="create-room"
+                                disabled={this.state.name === ''}
+                                onClick={this.handleCreateRoomClick}>
+                                Create new room
+                            </button>
 
-                        {/* Join an existing room, only if a name is entered. 
-                            Prompts entry of a join code */}
-                        <button
-                            className="join-room"
-                            disabled={this.state.name === ''}
-                            onClick={this.handleJoinRoomClick}>
-                            Join room
-                        </button>
+                            {/* Join an existing room, only if a name is entered. 
+                                Prompts entry of a join code */}
+                            <button
+                                className="join-room"
+                                disabled={this.state.name === ''}
+                                onClick={this.handleJoinRoomClick}>
+                                Join room
+                            </button>
+                            </div>
 
                         {/* Joins an existing room upon join code entry. */}
                         

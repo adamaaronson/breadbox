@@ -68,50 +68,49 @@ export default class App extends Component {
         return (
             <Router>
                 <div className="app">
-                    <div className="authors">
-                        Created by Adam Aaronson and Cale Wolf for HackIllinois 2021 😎
-                    </div>
-                    <Route exact path={this.getRealPath("/")} render={() => (
-                        <Welcome
-                            onSetRoomCode={this.setRoomCode}
-                            onSetAnswerer={this.setAnswerer}
-                            onSetUserID={this.setUserID}
-                            onSetUserName={this.setUserName}
-                        />
-                    )}/>
+                    <div className="main-content">
+                        <Route exact path={this.getRealPath("/")} render={() => (
+                            <Welcome
+                                onSetRoomCode={this.setRoomCode}
+                                onSetAnswerer={this.setAnswerer}
+                                onSetUserID={this.setUserID}
+                                onSetUserName={this.setUserName}
+                            />
+                        )}/>
 
-                    <Route exact path={this.getRealPath("/setup")} render={() => (
-                        <GameSetup
-                            roomCode={this.state.roomCode}
-                            isAnswerer={this.state.isAnswerer}
-                        />
-                    )}/>
-                    
-                    <Route exact path={this.getRealPath("/game")} render={() => (
-                        this.state.isAnswerer ? (
-                            <Answerer
-                                userID={this.state.userID}
-                                userName={this.state.userName}
+                        <Route exact path={this.getRealPath("/setup")} render={() => (
+                            <GameSetup
                                 roomCode={this.state.roomCode}
+                                isAnswerer={this.state.isAnswerer}
                             />
-                        ) : (
-                            <Guesser
-                                userID={this.state.userID}
-                                userName={this.state.userName}
+                        )}/>
+                        
+                        <Route exact path={this.getRealPath("/game")} render={() => (
+                            this.state.isAnswerer ? (
+                                <Answerer
+                                    userID={this.state.userID}
+                                    userName={this.state.userName}
+                                    roomCode={this.state.roomCode}
+                                />
+                            ) : (
+                                <Guesser
+                                    userID={this.state.userID}
+                                    userName={this.state.userName}
+                                    roomCode={this.state.roomCode}
+                                />
+                            )
+                        )}/>
+                        <Route exact path={this.getRealPath("/end")} render={() => (
+                            <Endgame
                                 roomCode={this.state.roomCode}
+                                isAnswerer={this.state.isAnswerer}
+                                thing={this.state.thing}
+                                userID={this.state.userID}
+                                isPreviousAnswerer={this.state.isAnswerer}
+                                onSetAnswerer={this.setAnswerer}
                             />
-                        )
-                    )}/>
-                    <Route exact path={this.getRealPath("/end")} render={() => (
-                        <Endgame
-                            roomCode={this.state.roomCode}
-                            isAnswerer={this.state.isAnswerer}
-                            thing={this.state.thing}
-                            userID={this.state.userID}
-                            isPreviousAnswerer={this.state.isAnswerer}
-                            onSetAnswerer={this.setAnswerer}
-                        />
-                    )}/>
+                        )}/>
+                    </div>
                 </div>
             </Router>
         )

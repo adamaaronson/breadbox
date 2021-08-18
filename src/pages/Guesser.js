@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import QuestionLog from '../components/QuestionLog.js'
 import Header from '../components/Header.js'
+import Footer from '../components/Footer.js'
 import {Redirect} from 'react-router-dom'
 import db from '../services/firebase.js';
 import '../css/Player.scss'
@@ -89,7 +90,8 @@ export default class Guesser extends Component {
         return this.state.finished ? (
             <Redirect to="./end" />
         ) : (
-            <div className="game-page guesser-page">
+            <>
+            <div className="game-page guesser-page page-content">
                 <Header />
                 <div className="player-info-boxes">
                     <h3 className="player-name-box">
@@ -144,8 +146,9 @@ export default class Guesser extends Component {
                     </div>
                     <QuestionLog roomCode={this.props.roomCode}/>
                 </div>
-                    
             </div>
+            <Footer/>
+            </>
         )
     }
 }

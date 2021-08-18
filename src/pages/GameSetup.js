@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Header from '../components/Header.js'
+import Footer from '../components/Footer.js'
 import { Redirect } from 'react-router-dom'
 import db from '../services/firebase';
 import '../css/GameSetup.scss'
@@ -80,7 +81,8 @@ export default class GameSetup extends Component {
             this.state.beginningGame ? (
                 <Redirect to="./game" />
             ) : (
-                <div className="game-page game-setup-page">
+                <>
+                <div className="game-page game-setup-page page-content">
                     <Header />
                     
                     <h2 className="game-setup-header">
@@ -113,15 +115,17 @@ export default class GameSetup extends Component {
                             <h4>
                                 (don't tell anyone!)
                             </h4>
-                            <input
-                                className="thing-input-box"
-                                id="thing-input-box"
-                                type="text"
-                                onChange={this.handleThingChange}>
-                            </input>
-                            <button type="submit" disabled={this.state.thing === ""}>
-                                Start game!
-                            </button>
+                            <div className="thing-input-box-wrapper">
+                                <input
+                                    className="thing-input-box"
+                                    id="thing-input-box"
+                                    type="text"
+                                    onChange={this.handleThingChange}>
+                                </input>
+                                <button type="submit" disabled={this.state.thing === ""}>
+                                    Start game!
+                                </button>
+                            </div>
                         </form>
                     ) : (
                         <div>
@@ -130,7 +134,10 @@ export default class GameSetup extends Component {
                             </h3>
                         </div> 
                     )}
+                    
                 </div>
+                <Footer/>
+                </>
             )
         )
     }

@@ -4,6 +4,10 @@
     margin-bottom: $spacing-unit;
 }
 
+.game-setup-page {
+    display: inline-block;
+}
+
 .room-code-box {
     background: $yellow;
     padding: $spacing-unit;
@@ -16,13 +20,28 @@
     margin-bottom: $spacing-unit;
 }
 
-.thing-input-label {
-    display: block;
+.thing-input-box-wrapper {
+    margin-top: $spacing-unit;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    @media (max-width: 600px) {
+        flex-direction: column;
+    }
 }
 
 .thing-input-box {
-    margin-top: $spacing-unit;
     margin-right: $spacing-unit / 2;
+    margin-bottom: 0;
+
+    @media (max-width: 600px) {
+        margin-right: 0 !important;
+        margin-bottom: $spacing-unit / 2;
+        width: 100%;
+    }
 }
 
 .thing-input-form {

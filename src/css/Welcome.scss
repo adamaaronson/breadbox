@@ -2,11 +2,13 @@
 
 // Welcome page
 
+.welcome-page-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .welcome-page {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     display: inline-block;
     width: calc(min(800px, 100%));
 
@@ -23,10 +25,21 @@
 
 .name-form {
     margin-bottom: $spacing-unit;
+    
+    @media (max-width: 600px) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
 .enter-name-label {
     padding-right: $spacing-unit;
+
+    @media (max-width: 600px) {
+        padding-right: 0;
+        padding-bottom: $spacing-unit / 2;
+    }
 }
 
 .enter-name {
@@ -34,8 +47,22 @@
     display: inline-block;
 }
 
-.create-room {
+.room-buttons {
+    @media (max-width: 400px) {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.room-buttons > *:not(:last-child) {
     margin-right: $spacing-unit;
+
+    @media (max-width: 400px) {
+        margin-right: 0;
+        margin-bottom: $spacing-unit / 2;
+    }
 }
 
 .join-room {

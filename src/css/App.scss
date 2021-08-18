@@ -9,6 +9,7 @@ $no-color: #e46565;
 
 $good-radius: 6px;
 $good-border: 3px solid $black;
+$footer-height: 3em;
 
 $spacing-unit: 1.2rem;
 
@@ -32,11 +33,15 @@ body {
 }
 
 .game-page {
-    padding: $spacing-unit * 2;
+    padding: $spacing-unit;
 }
 
 :disabled {
     opacity: 0.5;
+}
+
+html, .app {
+    height: 100%;
 }
 
 .app {
@@ -81,6 +86,7 @@ input[type=text] {
     padding-bottom: $spacing-unit;
     border-bottom: 1px solid $gray;
     display: inline-block;
+    text-align: center;
     margin-bottom: $spacing-unit;
 }
 
@@ -92,34 +98,36 @@ input[type=text] {
 }
 
 .logo {
-    height: 8rem;
+    height: calc(8 * min(1rem, 2.7vw));
     margin-right: $spacing-unit/2;
 }
 
 .title {
-    font-size: 5rem;
+    min-height: 0vw; // necessary for fluid text resizing
+    font-size: calc(5 * min(1rem, 2.7vw)) !important;
     line-height: 1em;
-    text-align: left;
-    // margin-top: 8px;
 }
 
 .subtitle {
-    font-size: 1.5rem;
-    // text-align: left;
-    // margin-left: 5px;
+    min-height: 0vw; // necessary for fluid text resizing
+    font-size: calc(1.5 * min(1rem, 2.7vw));
 }
 
-.app {
-    position: relative;
+// Footer
+
+.main-content {
+    // background: red;
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: 1fr auto;
 }
 
-.authors {
-    position: fixed;
-    width: 100%;
+.footer {
+    grid-row-start: 2;
+    grid-row-end: 3;
     text-align: center;
-    left: 100%;
-    top: 100%;
-    transform: translate(-100%, -100%);
     font-size: 0.7em;
     padding: $spacing-unit / 2;
+    // background: $white;
+    z-index: 4204;
 }
